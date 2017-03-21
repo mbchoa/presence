@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Root = () => (
+const HomePage = () => (
   <div>Hello from Presence!</div>
 )
 
-export default Root
+export default HomePage
