@@ -1,14 +1,14 @@
 .login {
     width: 980px;
     margin: 0 auto;
-}
 
-.login__header {
-    padding: 25px 0;
-    text-align: center;
-    border: 1px solid black;
-}
+    &__header {
+        padding: 25px 0;
+        text-align: center;
+        border: 1px solid black;
+    }
 
-.login__form {
-    padding: 20px 25px;
+    &__form {
+        padding: 20px 25px;
+    }
 }
