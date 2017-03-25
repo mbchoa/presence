@@ -16,10 +16,11 @@
         color: white;
         padding: 25px 0;
         text-align: center;
-        background-color: #28536B;
+        background-color: rgba(40, 83, 107, 0.9)
     }
 
     &__form {
+        background-color: rgba(255, 255, 255, 0.9);
         border-width: 0 1px 1px 1px;
         border-style: solid;
         border-color: #DDDDDD;
@@ -40,7 +41,7 @@
         outline: none;
 
         &:focus {
-            border: 1px solid #A3E7FC;
+            border: 1px solid #507DBC;
         }
     }
 
@@ -49,7 +50,7 @@
         padding: 10px;
         text-align: center;
         width: 100%;
-        background-color: #7EA8BE;
+        background-color: #507DBC;
         font-size: 16px;
         color: white;
         border: 0;
