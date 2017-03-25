@@ -1,5 +1,5 @@
 .login {
-    background-image: url(http://www.wallpaperup.com/uploads/wallpapers/2013/01/20/30497/300fd00b94d40ea927cc5e4415330f2d.jpg);
+    font-family: 'Nunito', sans-serif;
 
     &__modal {
         width: 440px;
