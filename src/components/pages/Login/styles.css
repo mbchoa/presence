@@ -1,4 +1,6 @@
 .login {
+    background-image: url(http://www.wallpaperup.com/uploads/wallpapers/2013/01/20/30497/300fd00b94d40ea927cc5e4415330f2d.jpg);
+
     &__modal {
         width: 440px;
         position: absolute;
@@ -38,7 +40,7 @@
         outline: none;
 
         &:focus {
-            border: 1px solid #84DD63;
+            border: 1px solid #A3E7FC;
         }
     }
 
