@@ -2,7 +2,7 @@
     &__modal {
         width: 440px;
         position: absolute;
-        top: 40%;
+        top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
     }
@@ -14,7 +14,7 @@
         color: white;
         padding: 25px 0;
         text-align: center;
-        background-color: #6BAA75;
+        background-color: #28536B;
     }
 
     &__form {
@@ -47,7 +47,7 @@
         padding: 10px;
         text-align: center;
         width: 100%;
-        background-color: #84DD63;
+        background-color: #7EA8BE;
         font-size: 16px;
         color: white;
         border: 0;
