@@ -1,0 +1,34 @@
+.stopwatch-page {
+    &__center-div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__display {
+        border: 5px solid #507DBC;
+        border-radius: 50%;
+        width: 300px;
+        height: 300px;
+        position: relative;
+
+        &:hover {
+            cursor: pointer;
+            cursor: hand;
+        }
+    }
+}
+
+.stopwatch {
+    &__label {
+        &--large {
+            font-size: 36px;
+        }
+
+        &--small {
+            margin-left: 4px;
+            font-size: 18px;
+        }
+    }
+}
