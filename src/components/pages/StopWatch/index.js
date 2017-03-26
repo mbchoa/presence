@@ -45,6 +45,10 @@ export default class StopWatchPage extends Component {
     render() {
         const { isStarted } = this.timer;
         const { elapsedMs } = this.state;
+        
+        const btnLabelClass = `stopwatch-page__btn-label--${ 
+            isStarted ? 'pause' : 'play'
+        }`;
 
         return (
             <div className="stopwatch-page">
@@ -54,12 +58,16 @@ export default class StopWatchPage extends Component {
                             <StopWatchDisplay elapsedMs={ elapsedMs } />
                         </div>
                     </div>
-                    <button onClick={ this.toggleTimer }>
-                        { isStarted ? 'Pause' : 'Start' }
-                    </button>
-                    { elapsedMs > 0 &&
-                        <button onClick={ this.resetTimer }>Reset</button>
-                    }
+                    <div className="stopwatch-page__media-control">
+                        <div className="stopwatch-page__center-controls">
+                            <button className="stopwatch-page__playback-btn" onClick={ this.toggleTimer }>
+                                <div className={ btnLabelClass }></div>
+                            </button>
+                            {/*{ elapsedMs > 0 &&
+                                <button onClick={ this.resetTimer }>Reset</button>
+                            }*/}
+                        </div>
+                    </div>
                 </div>
             </div>
         );

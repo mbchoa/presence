@@ -2814,6 +2814,12 @@ postcss-svgo@^2.1.1:
     postcss-value-parser "^3.2.3"
     svgo "^0.7.0"
 
+postcss-triangle@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/postcss-triangle/-/postcss-triangle-1.0.1.tgz#20f64401a79122a67b0d8b2326b4729091211655"
+  dependencies:
+    postcss "^5.0.2"
+
 postcss-unique-selectors@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/postcss-unique-selectors/-/postcss-unique-selectors-2.0.2.tgz#981d57d29ddcb33e7b1dfe1fd43b8649f933ca1d"

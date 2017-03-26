@@ -18,6 +18,46 @@
             cursor: hand;
         }
     }
+
+    &__media-control {
+        position: relative;
+        padding-top: 40px;
+    }
+
+    &__center-controls {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &__playback-btn {
+        background-color: #507DBC;
+        border: none;
+        border-radius: 50%;
+        outline: 0;
+        width: 35px;
+        height: 35px;
+    }
+
+    &__btn-label {
+        &--play {
+            display: inline-block;
+            content: "";
+            margin-left: 3px;
+            triangle: equilateral pointing-right;
+            width: 15px;
+            background-color: white;
+        }
+
+        &--pause {
+            margin-top: 1px;
+            margin-left: 5px;
+            width: 4px;
+            height: 16px;
+            border-right: 4px solid white;
+            border-left: 4px solid white;
+        }
+    }
 }
 
 .stopwatch {
