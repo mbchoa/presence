@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './styles.css';
 
-const Login = () => (
+const LoginPage = () => (
     <div className="login">
         <div className="login__modal">
             <div className="modal">
@@ -21,4 +21,4 @@ const Login = () => (
     </div>
 )
 
-export default Login;
+export default LoginPage;
