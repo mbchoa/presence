@@ -1,0 +1,5 @@
+.square {
+    &:hover {
+        fill: blue;
+    }
+}

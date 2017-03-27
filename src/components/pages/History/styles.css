@@ -1,0 +1,7 @@
+.history-page {
+    &__grid {
+        padding: 20px;
+        display: inline-block;
+        border: 1px solid black;
+    }   
+}

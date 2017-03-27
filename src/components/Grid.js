@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Grid = ({ children, props }) =>
+const Grid = (props) =>
     <svg { ...props }>
-        { children }
+        { props.children }
     </svg>
 
 export default Grid;
