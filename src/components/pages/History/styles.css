@@ -1,18 +1,26 @@
 .history-page {
     width: 960px;
     margin: 0 auto;
-
-    &__month {
+    
+    &__month-container {
         width: 960px;
         height: 100%;
-        padding: 10px;
         position: relative;
+    }
+
+    &__month-dropzone {
+        padding: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid #DDDDDD;
     }   
 }
 
 .month {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    &__title {
+        font-family: Nunito, san-serif;
+        text-align: center;
+    }
 }
