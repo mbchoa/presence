@@ -1,7 +1,18 @@
 .history-page {
+    width: 960px;
+    margin: 0 auto;
+
     &__month {
-        padding: 20px;
-        display: inline-block;
-        border: 1px solid black;
+        width: 960px;
+        height: 100%;
+        padding: 10px;
+        position: relative;
     }   
+}
+
+.month {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

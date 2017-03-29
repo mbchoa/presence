@@ -6,7 +6,7 @@ import Square from '../../Square';
 
 const Month = () =>
     <div className="month">
-        <Grid width={ `${ 50 * 5 + 5 * 4}`} height="380">
+        <Grid width="270" height="380">
             <VRow padding="5">
                 <Square width="50" height="50" fill="red" />
                 <Square width="50" height="50" fill="red" />
