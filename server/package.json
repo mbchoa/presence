@@ -1,0 +1,16 @@
+{
+  "name": "presence-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Michael-Bryant Choa",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "mongoose": "^4.9.2",
+    "redis": "^2.7.1"
+  }
+}
