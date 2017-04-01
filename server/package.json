@@ -2,6 +2,9 @@
   "name": "presence-server",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "build": "gulp build"
+  },
   "author": "Michael-Bryant Choa",
   "license": "MIT",
   "dependencies": {
@@ -14,6 +17,9 @@
     "redis": "^2.7.1"
   },
   "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-preset-latest": "^6.24.0",
+    "fs-extra": "^2.1.2",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2"
   }
