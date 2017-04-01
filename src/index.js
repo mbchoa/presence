@@ -2,19 +2,23 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 
+import configureStore from '../redux/configureStore';
 import Routes from './routes'
 
-const render = Component => {
+const store = configureStore();
+
+const render = () => {
   ReactDOM.render(
     <AppContainer>
-      <Component />
+      <Routes store={ store } />
     </AppContainer>,
     document.getElementById('root')
   )
 }
 
-render(Routes)
+render()
 
 if (module.hot) {
-  module.hot.accept('./routes', () => { render(Routes) })
+  module.hot.accept('./routes', () => { render() });
+
 }
