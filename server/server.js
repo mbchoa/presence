@@ -63,7 +63,49 @@ app.post('/signup', (req, res) => {
         });
 });
 
-app.post('/login', function() {})
+app.post('/login', (req, res) => {
+    const {
+        email,
+        password,
+    } = req.body;
+
+    if (!email) 
+        return res.status(400).send({ 
+            error: 'You must enter an e-mail address',
+        });
+
+    if (!password)
+        return res.status(400).send({ 
+            error: 'You must enter a password',
+        });
+
+    UserModel
+        .findOne({ email })
+        .then(user => {
+            if (!user) {
+                return res.status(400).send({
+                    error: 'User does not exist. Please enter a valid username',
+                });
+            }
+
+            user.comparePassword(password, (err, isMatch) => {
+                if (err) return res.status(400).send({
+                    error: 'Error validating password. Please try again',
+                });
+
+                // TODO:  add max retry attempts
+                if (!isMatch) return res.status(400).send({
+                    error: 'Invalid password, Please try again',
+                });
+
+                console.log('Logged in user');
+                res.status(200).send({
+                    _id: user._id,
+                    email: user.email,
+                });
+            })
+        })
+});
 
 app.listen(PORT, () => {
     console.log(`Started server listening on port ${ PORT }`);
