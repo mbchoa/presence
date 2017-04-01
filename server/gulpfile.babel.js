@@ -6,7 +6,8 @@ const paths = {
     build: 'build/',
     server: [
         'server.js',
-        'config.js'
+        'config.js',
+        'users/**/*.js',
     ]
 };
 
