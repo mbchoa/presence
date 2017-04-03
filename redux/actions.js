@@ -13,11 +13,15 @@ function notifyAuthenticationSuccess() {
     };
 }
 
-export function loginUser(email, password) {
+export function loginUser({ email, password }) {
     return dispatch => {
+        console.log('Attemping to login user...');
         dispatch(notifyAuthenticationInProgress());
 
         const options = {
+            headers: {
+                'Content-Type': 'application/json'
+            },
             method: 'post',
             body: JSON.stringify({
                 email,
@@ -25,10 +29,10 @@ export function loginUser(email, password) {
             }),
         };
 
-        return fetch('/login', options)
+        return fetch('http://localhost:3000/login', options)
             .then(response => response.json())
             .then(json => {
-                
+                console.log('Successfully logged user in');
                 dispatch(notifyAuthenticationSuccess());
             });
     }

@@ -15,6 +15,7 @@ export default function rootReducer(state = {}, action) {
             return {
                 ...state,
                 isAuthenticationInProgress: false,
+                isAuthenticated: true,
             };
 
         default:

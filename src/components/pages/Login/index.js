@@ -1,12 +1,38 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 
+import { loginUser } from '../../../../redux/actions';
 import styles from './styles.css';
 
 class LoginPage extends Component {
+    state = {
+        redirectToReferrer: false,
+    };
+
+    constructor() {
+        super();
+        this._submit = this._submit.bind(this);
+    }
+
+    _submit(data) {
+        const { dispatch } = this.props;
+        dispatch(loginUser(data))
+            .then(() => {
+                this.setState({ redirectToReferrer: true });
+            });
+    }
+
     render() {
         const { handleSubmit } = this.props;
+        const { from } = this.props.location.state || { from: { pathname: '/' } };
+        const { redirectToReferrer } = this.state;
+
+        if (redirectToReferrer) {
+            return (
+                <Redirect to={ from } />
+            );
+        }
 
         return (
             <div className="login">
@@ -14,11 +40,11 @@ class LoginPage extends Component {
                     <div className="modal">
                         <header className="modal__header">Welcome back.</header>
                         <div className="modal__form">
-                            <form onSubmit={ handleSubmit }>
+                            <form onSubmit={ handleSubmit(this._submit) }>
                                 <p className="modal__label">Email</p>
                                 <Field 
                                     className="modal__input" 
-                                    name="username" 
+                                    name="email" 
                                     component="input" 
                                     type="text" />
                                 <p className="modal__label">Password</p>
@@ -37,13 +63,6 @@ class LoginPage extends Component {
     }
 }
 
-const loginReduxForm = reduxForm({
+export default reduxForm({
     form: 'login',
 })(LoginPage);
-
-export default connect(
-    state => ({}),
-    dispatch => ({
-        onSubmit: data => console.log('SUBMIT DATA: ', data),
-    }),
-)(loginReduxForm);

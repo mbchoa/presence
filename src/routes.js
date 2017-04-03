@@ -9,6 +9,7 @@ import HomePage from './components/pages/Home';
 import LoginPage from './components/pages/Login';
 import StopWatchPage from './components/pages/StopWatch';
 import HistoryPage from './components/pages/History';
+import PrivateRoute from './components/PrivateRoute';
 
 const Routes = ({ store }) => {
     return (
@@ -18,7 +19,7 @@ const Routes = ({ store }) => {
                     <Route exact path="/" component={HomePage} />
                     <Route path="/login" component={LoginPage} />
                     <Route path="/stopwatch" component={StopWatchPage} />
-                    <Route path="/history" component={HistoryPage} />
+                    <PrivateRoute path="/history" component={HistoryPage} />
                 </div>
             </Router>
         </Provider>
