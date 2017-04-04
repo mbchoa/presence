@@ -8,6 +8,7 @@ const paths = {
         'server.js',
         'config.js',
         'users/**/*.js',
+        'helpers/**/*.js'
     ]
 };
 
