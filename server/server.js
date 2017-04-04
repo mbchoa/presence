@@ -1,10 +1,12 @@
 import bodyParser from 'body-parser';
+import connectRedis from 'connect-redis';
 import cookieParser from 'cookie-parser'
 import cors from 'cors';
 import express from 'express';
+import session from 'express-session';
 import mongoose from 'mongoose';
 
-import { DB_URI, PORT } from './config';
+import { DB_URI, PORT, REDIS_URL, SESSION_SECRET } from './config';
 import { UserModel } from './users';
 
 const app = express();
@@ -13,10 +15,22 @@ const app = express();
 mongoose.Promise = global.Promise;
 mongoose.connect(DB_URI);
 
+// setup redis session store
+const RedisStore = connectRedis(session);
+
 // setup express middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(session({
+    store: new RedisStore({
+        url: REDIS_URL,
+        secure: process.env.NODE_ENV === 'production',
+    }),
+    resave: false,
+    saveUninitialized: false,
+    secret: SESSION_SECRET,
+}));
 
 // setup routes
 app.post('/signup', (req, res) => {
@@ -101,6 +115,7 @@ app.post('/login', (req, res) => {
                 });
 
                 console.log('Logged in user');
+                req.session._id = user._id;
                 res.status(200).send({
                     _id: user._id,
                     email: user.email,
