@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Route } from 'react-router';
+import { Redirect, Route, withRouter } from 'react-router';
 
 class PrivateRoute extends Component {
     render() {
@@ -25,10 +25,10 @@ class PrivateRoute extends Component {
     }
 }
 
-export default connect(
+export default withRouter(connect(
     function mapStateToProps({ root }) {
         const { isAuthenticated } = root;
         return { isAuthenticated };
     },
     {}
-)(PrivateRoute);
+)(PrivateRoute));
