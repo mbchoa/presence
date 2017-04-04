@@ -5,10 +5,11 @@ import babel from 'gulp-babel';
 const paths = {
     build: 'build/',
     server: [
-        'server.js',
         'config.js',
+        'helpers/**/*.js',
+        'middleware/**/*.js',
+        'server.js',
         'users/**/*.js',
-        'helpers/**/*.js'
     ]
 };
 

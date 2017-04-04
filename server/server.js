@@ -8,6 +8,7 @@ import mongoose from 'mongoose';
 
 import { DB_URI, PORT, REDIS_URL, SESSION_SECRET } from './config';
 import { UserModel } from './users';
+import authMiddleware from './middleware/auth';
 
 const app = express();
 
@@ -33,21 +34,11 @@ app.use(session({
 }));
 
 // setup routes
-app.post('/signup', (req, res) => {
+app.post('/signup', authMiddleware, (req, res) => {
     const {
         email,
         password,
     } = req.body;
-
-    if (!email) 
-        return res.status(400).send({ 
-            error: 'You must enter an e-mail address',
-        });
-
-    if (!password)
-        return res.status(400).send({ 
-            error: 'You must enter a password',
-        });
 
     // validate new user
     UserModel
@@ -79,22 +70,18 @@ app.post('/signup', (req, res) => {
         });
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', authMiddleware, (req, res) => {
     const {
         email,
         password,
     } = req.body;
 
-    if (!email) 
-        return res.status(400).send({ 
-            error: 'You must enter an e-mail address',
-        });
-
-    if (!password)
-        return res.status(400).send({ 
-            error: 'You must enter a password',
-        });
-
+    if (req.session._id) {
+        console.log('User is already logged in');
+        console.log('Session user id at: ', req.session._id);
+        return res.status(200).send();
+    }
+    
     UserModel
         .findOne({ email })
         .then(user => {
@@ -115,7 +102,13 @@ app.post('/login', (req, res) => {
                 });
 
                 console.log('Logged in user');
-                req.session._id = user._id;
+                if (!req.session._id) {
+                    console.log('Create new session');
+                    req.session._id = user._id;
+                }
+                
+                console.log('Session.ID', req.session.id);
+
                 res.status(200).send({
                     _id: user._id,
                     email: user.email,
