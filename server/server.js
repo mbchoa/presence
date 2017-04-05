@@ -1,12 +1,12 @@
 import bodyParser from 'body-parser';
 import connectRedis from 'connect-redis';
-import cookieParser from 'cookie-parser'
 import cors from 'cors';
 import express from 'express';
 import session from 'express-session';
 import mongoose from 'mongoose';
+import redis from 'redis';
 
-import { DB_URI, PORT, REDIS_URL, SESSION_SECRET } from './config';
+import { DB_URI, PORT, REDIS_PORT, SESSION_SECRET } from './config';
 import { UserModel } from './users';
 import authMiddleware from './middleware/auth';
 
@@ -20,18 +20,28 @@ mongoose.connect(DB_URI);
 const RedisStore = connectRedis(session);
 
 // setup express middleware
+app.use(cors({ 
+    origin: 'http://localhost:8080',
+}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
 app.use(session({
+    name: 'session-id',
     store: new RedisStore({
-        url: REDIS_URL,
-        secure: process.env.NODE_ENV === 'production',
+        client: redis.createClient(),
+        host: 'localhost',
+        port: REDIS_PORT,
     }),
     resave: false,
     saveUninitialized: false,
     secret: SESSION_SECRET,
 }));
+
+// debugging
+app.use(function printSession (req, res, next) {
+    console.log('req.session', req.session);
+    next();
+});
 
 // setup routes
 app.post('/signup', authMiddleware, (req, res) => {
@@ -75,12 +85,6 @@ app.post('/login', authMiddleware, (req, res) => {
         email,
         password,
     } = req.body;
-
-    if (req.session._id) {
-        console.log('User is already logged in');
-        console.log('Session user id at: ', req.session._id);
-        return res.status(200).send();
-    }
     
     UserModel
         .findOne({ email })
@@ -101,14 +105,7 @@ app.post('/login', authMiddleware, (req, res) => {
                     error: 'Invalid password, Please try again',
                 });
 
-                console.log('Logged in user');
-                if (!req.session._id) {
-                    console.log('Create new session');
-                    req.session._id = user._id;
-                }
-                
-                console.log('Session.ID', req.session.id);
-
+                req.session.user_id = user._id;
                 res.status(200).send({
                     _id: user._id,
                     email: user.email,
