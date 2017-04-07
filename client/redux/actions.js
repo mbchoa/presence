@@ -19,6 +19,7 @@ export function loginUser({ email, password }) {
         dispatch(notifyAuthenticationInProgress());
 
         const options = {
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },
