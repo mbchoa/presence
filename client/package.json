@@ -4,7 +4,8 @@
   "description": "Daimoku tracker",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --hot --history-api-fallback --open"
+    "dev": "webpack-dev-server --hot --history-api-fallback --open",
+    "build": "webpack --config webpack.prod.config.js --progress"
   },
   "repository": "git@github.com:mbchoa/presence.git",
   "author": "Michael-Bryant Choa <michael-bryant.choa@hautelook.com>",
