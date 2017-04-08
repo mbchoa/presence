@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 
 import HomePage from './components/pages/Home';
+import SignupPage from './components/pages/Signup';
 import LoginPage from './components/pages/Login';
 import StopWatchPage from './components/pages/StopWatch';
 import HistoryPage from './components/pages/History';
@@ -17,6 +18,7 @@ const Routes = ({ store }) => {
             <Router>
                 <div>
                     <Route exact path="/" component={HomePage} />
+                    <Route path="/signup" component={SignupPage} />
                     <Route path="/login" component={LoginPage} />
                     <Route path="/stopwatch" component={StopWatchPage} />
                     <PrivateRoute path="/history" component={HistoryPage} />
