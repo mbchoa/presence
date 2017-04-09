@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 
 import { loginUser } from '../../../../redux/actions';
 import styles from './styles.css';
 
 class LoginPage extends Component {
-    state = {
-        redirectToReferrer: false,
-    };
-
     constructor() {
         super();
         this._submit = this._submit.bind(this);
@@ -18,17 +15,13 @@ class LoginPage extends Component {
     _submit(data) {
         const { dispatch } = this.props;
         dispatch(loginUser(data))
-            .then(() => {
-                this.setState({ redirectToReferrer: true });
-            });
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, isAuthenticated } = this.props;
         const { from } = this.props.location.state || { from: { pathname: '/' } };
-        const { redirectToReferrer } = this.state;
 
-        if (redirectToReferrer) {
+        if (isAuthenticated) {  
             return (
                 <Redirect to={ from } />
             );
@@ -63,6 +56,9 @@ class LoginPage extends Component {
     }
 }
 
-export default reduxForm({
+export default connect(
+    state => ({ isAuthenticated: state.root.isAuthenticated }),
+    {} 
+)(reduxForm({
     form: 'login',
-})(LoginPage);
+})(LoginPage));

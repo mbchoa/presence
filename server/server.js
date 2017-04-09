@@ -38,13 +38,6 @@ app.use(session({
     secret: SESSION_SECRET,
 }));
 
-// debugging
-app.use(function printSession (req, res, next) {
-    console.log('req.session', req.session);
-    next();
-});
-
-// setup routes
 app.post('/signup', authMiddleware, (req, res) => {
     const {
         email,
@@ -69,8 +62,7 @@ app.post('/signup', authMiddleware, (req, res) => {
                 .then(user => {
                     console.log('Created new user');
                     return res.status(200).send({
-                        _id: user._id,
-                        email: user.email,
+                        successMsg: 'Created new user!'
                     });
                 })
                 .catch(err =>
@@ -108,8 +100,8 @@ app.post('/login', authMiddleware, (req, res) => {
 
                 req.session.user_id = user._id;
                 res.status(200).send({
-                    _id: user._id,
-                    email: user.email,
+                    successMsg: 'User logged in!',
+                    userId: user._id
                 });
             })
         })

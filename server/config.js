@@ -1,4 +1,4 @@
-const DB_URI = 'mongodb://localhost:27017';
+const DB_URI = 'mongodb://localhost:27017/presence';
 const PORT = process.env.PORT || 3000;
 const REDIS_PORT = process.env.REDIS_PORT || 6379;
 const SESSION_SECRET = process.env.SESSION_SECRET || 'cowgomoo';
