@@ -5,13 +5,14 @@ import thunkMiddleware from 'redux-thunk';
 import root from './reducers';
 import initial from './initialState';
 
-export default function configureStore(initialState = initial) {
+export default function configureStore(initialState) {
+
     return createStore(
         combineReducers({
             form,
             root,
         }),
-        initialState,
+        { ...initial, ...initialState },
         applyMiddleware(thunkMiddleware),
     );
 }

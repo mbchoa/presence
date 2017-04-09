@@ -1,4 +1,4 @@
-import { setSessionId } from '../src/helpers/localStorage';
+import { getSessionId, setSessionId } from '../src/helpers/localStorage';
 
 export const NOTIFY_AUTHENTICATION_IN_PROGRESS = 'NOTIFY_AUTHENTICATION_IN_PROGRESS';
 export const NOTIFY_AUTHENTICATION_SUCCESS = 'NOTIFY_AUTHENTICATION_SUCCESS';
@@ -21,6 +21,15 @@ function notifyAuthenticationSuccess(loginSuccessMessage) {
     return {
         type: NOTIFY_AUTHENTICATION_SUCCESS,
         loginSuccessMessage
+    };
+}
+
+
+export function checkUserSession() {
+    return dispatch => {
+        if (getSessionId()) {
+            dispatch(notifyAuthenticationSuccess('Session exists already!'));
+        }
     };
 }
 
