@@ -4,6 +4,8 @@ import { Field, reduxForm } from 'redux-form';
 import { Redirect } from 'react-router-dom';
 
 import { loginUser } from '../../../../redux/actions';
+import { getSessionId } from '../../../helpers/localStorage';
+
 import styles from './styles.css';
 
 class LoginPage extends Component {
