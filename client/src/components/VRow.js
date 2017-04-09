@@ -8,7 +8,7 @@ const VRow = (props) =>
                 React.cloneElement(
                     child,
                     assign(
-                        {},
+                        { key: i },
                         child.props,
                         { y: i * (+child.props.width + +props.padding)  }
                     )

@@ -8,7 +8,7 @@ const HRow = (props) =>
                 React.cloneElement(
                     child,
                     assign(
-                        {},
+                        { key, i },
                         child.props,
                         { x: i * (+child.props.width + +props.padding)  }
                     )
