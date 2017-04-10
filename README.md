@@ -1,4 +1,8 @@
-# presence
+> # pres·ence
+> ## /ˈprezəns/
+> *noun*
+>
+> &nbsp;&nbsp;&nbsp;&nbsp;the state or fact of existing, occurring, or being present in a place or thing.
 
 ## Client Setup
 
