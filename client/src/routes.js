@@ -15,6 +15,8 @@ import HistoryPage from './components/pages/History';
 import PrivateRoute from './components/PrivateRoute';
 import NotFoundPage from './components/NotFoundPage';
 
+import './styles.css';
+
 const Routes = ({ store }) => {
     return (
         <Provider store={ store }>
