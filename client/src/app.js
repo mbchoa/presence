@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import {
     BrowserRouter as Router,
@@ -18,9 +18,13 @@ import NavBar from './components/NavBar';
 
 import './styles.css';
 
-const Routes = ({ store }) => {
-    return (
-        <Provider store={ store }>
+class App extends Component {
+    componentDidMount () {
+        
+    }
+
+    render () {
+        return (
             <Router>
                 <div>
                     <NavBar />
@@ -35,8 +39,8 @@ const Routes = ({ store }) => {
                     </Switch>
                 </div>
             </Router>
-        </Provider>
-    );
-};
+        );
+    }
+}
 
-export default Routes;
+export default App;
