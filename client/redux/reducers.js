@@ -2,6 +2,8 @@ import {
     NOTIFY_AUTHENTICATION_FAILED,
     NOTIFY_AUTHENTICATION_IN_PROGRESS,
     NOTIFY_AUTHENTICATION_SUCCESS,
+    NOTIFY_SIGN_UP_FAILED,
+    NOTIFY_SIGN_UP_SUCCESS,
     SAVE_CURRENT_SESSION_TIME
 } from './actions';
 
@@ -34,7 +36,20 @@ export default function rootReducer(state = {}, action) {
             return {
                 ...state,
                 currentSessionTime: action.time
-            }
+            };
+
+        case NOTIFY_SIGN_UP_FAILED:
+            return {
+                ...state,
+                signUpError: action.error
+            };
+
+        case NOTIFY_SIGN_UP_SUCCESS:
+            return {
+                ...state,
+                signUpSuccess: action.success
+            };
+            
         default:
             return state;
     }
