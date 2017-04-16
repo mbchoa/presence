@@ -1,64 +1,6 @@
 .signup {
-    font-family: 'Nunito', sans-serif;
 
-    &__modal {
-        width: 440px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-}
-
-.modal {
-    &__header {
-        font-size: 24px;
-        color: white;
-        padding: 25px 0;
-        text-align: center;
-        background-color: rgba(40, 83, 107, 0.9)
-    }
-
-    &__form {
-        background-color: rgba(255, 255, 255, 0.9);
-        border-width: 0 1px 1px 1px;
-        border-style: solid;
-        border-color: #DDDDDD;
-        padding: 30px 60px;
-    }
-
-    &__label {
-        color: #69747C;
-        font-size: 14px;
-    }
-
-    &__input {
-        padding: 10px;
-        font-size: 18px;
-        width: 100%;
-        border: 1px solid #DDDDDD;
-        border-radius: 3px;
-        outline: none;
-
-        &:focus {
-            border: 1px solid #507DBC;
-        }
-    }
-
-    &__submit {
-        margin-top: 20px;
-        padding: 10px;
-        text-align: center;
-        width: 100%;
-        background-color: #507DBC;
-        font-size: 16px;
-        color: white;
-        border: 0;
-        border-radius: 3px;
-        cursor: pointer;
-
-        &:hover {
-            background-color: #7EA8BE;
-        }
+    &__error {
+        color: red;
     }
 }
