@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import styles from './styles.css';
 
+import { saveCurrentSessionTime } from '../../../../redux/actions';
 import EnhancedStopwatch from '../../../utils/EnhancedStopwatch';
 
 import StopWatchDisplay from './StopWatchDisplay';
 
-export default class StopWatchPage extends Component {
+class StopWatchPage extends Component {
     constructor() {
         super();
         this.state = {
@@ -28,8 +30,11 @@ export default class StopWatchPage extends Component {
     }
 
     toggleTimer() {
+        const { saveTime } = this.props;
+
         if (this.timer.isStarted) {
             this.timer.stop();
+            saveTime(this.state.elapsedMs);
         } else {
             this.timer.start();
         }
@@ -42,6 +47,10 @@ export default class StopWatchPage extends Component {
         });
     }
 
+    componentDidMount() {
+        this.setState({ elapsedMs: this.props.currentSessionTime });
+    }
+    
     render() {
         const { isStarted } = this.timer;
         const { elapsedMs } = this.state;
@@ -73,3 +82,8 @@ export default class StopWatchPage extends Component {
         );
     }
 }
+
+export default connect(
+    ({ root }) => ({ currentSessionTime: root.currentSessionTime }),
+    { saveTime: saveCurrentSessionTime }
+)(StopWatchPage);
