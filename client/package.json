@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --hot --history-api-fallback --open",
-    "build": "webpack --config webpack.prod.config.js --progress"
+    "build": "webpack -p --config webpack.prod.config.js --progress"
   },
   "repository": "git@github.com:mbchoa/presence.git",
   "author": "Michael-Bryant Choa <michael-bryant.choa@hautelook.com>",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.3",
+    "express": "^4.15.2",
     "left-pad": "^1.1.3",
     "lodash": "^4.17.4",
     "postcss-triangle": "^1.0.1",
