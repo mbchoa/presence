@@ -1,7 +1,8 @@
 import { 
     NOTIFY_AUTHENTICATION_FAILED,
     NOTIFY_AUTHENTICATION_IN_PROGRESS,
-    NOTIFY_AUTHENTICATION_SUCCESS
+    NOTIFY_AUTHENTICATION_SUCCESS,
+    SAVE_CURRENT_SESSION_TIME
 } from './actions';
 
 export default function rootReducer(state = {}, action) {
@@ -28,6 +29,12 @@ export default function rootReducer(state = {}, action) {
                 isAuthenticated: false,
             };
 
+        case SAVE_CURRENT_SESSION_TIME:
+            console.log('save current session time', action.time);
+            return {
+                ...state,
+                currentSessionTime: action.time
+            }
         default:
             return state;
     }

@@ -3,6 +3,7 @@ import { getSessionId, setSessionId } from '../src/helpers/localStorage';
 export const NOTIFY_AUTHENTICATION_IN_PROGRESS = 'NOTIFY_AUTHENTICATION_IN_PROGRESS';
 export const NOTIFY_AUTHENTICATION_SUCCESS = 'NOTIFY_AUTHENTICATION_SUCCESS';
 export const NOTIFY_AUTHENTICATION_FAILED = 'NOTIFY_AUTHENTICATION_FAILED';
+export const SAVE_CURRENT_SESSION_TIME = 'SAVE_CURRENT_SESSION_TIME';
 
 function notifyAuthenticationFailed(loginErrorMessage) {
     return {
@@ -59,5 +60,12 @@ export function loginUser({ email, password }) {
                 setSessionId(userId);
                 dispatch(notifyAuthenticationSuccess(successMsg));
             });
+    }
+}
+
+export function saveCurrentSessionTime(time) {
+    return {
+        type: SAVE_CURRENT_SESSION_TIME,
+        time
     }
 }
