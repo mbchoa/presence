@@ -33,6 +33,10 @@ class LoginPage extends Component {
             );
         }
 
+        const modalErrorClass = loginErrorMessage
+            ? 'modal__error modal__error--active'
+            : 'modal__error';
+
         return (
             <div className="login">
                 <div className="login__modal">
@@ -52,7 +56,7 @@ class LoginPage extends Component {
                                     name="password" 
                                     component="input" 
                                     type="password" />
-                                <p className="modal__error">{ loginErrorMessage }</p>
+                                <p className={ modalErrorClass }>{ loginErrorMessage }</p>
                                 <button type="submit" className="modal__submit">Login</button>
                             </form>
                         </div>
