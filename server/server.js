@@ -22,7 +22,7 @@ const RedisStore = connectRedis(session);
 // setup express middleware
 app.use(cors({ 
     credentials: true,
-    origin: 'http://localhost:8080',
+    origin: 'http://localhost:4000',
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
