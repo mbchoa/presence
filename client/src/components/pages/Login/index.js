@@ -20,7 +20,11 @@ class LoginPage extends Component {
     }
 
     render() {
-        const { handleSubmit, isAuthenticated } = this.props;
+        const { 
+            handleSubmit, 
+            isAuthenticated, 
+            loginErrorMessage 
+        } = this.props;
         const { from } = this.props.location.state || { from: { pathname: '/' } };
 
         if (isAuthenticated) {  
@@ -48,6 +52,7 @@ class LoginPage extends Component {
                                     name="password" 
                                     component="input" 
                                     type="password" />
+                                <p className="modal__error">{ loginErrorMessage }</p>
                                 <button type="submit" className="modal__submit">Login</button>
                             </form>
                         </div>
@@ -59,7 +64,10 @@ class LoginPage extends Component {
 }
 
 export default connect(
-    state => ({ isAuthenticated: state.root.isAuthenticated }),
+    ({ root }) => ({ 
+        isAuthenticated: root.isAuthenticated,
+        loginErrorMessage: root.loginErrorMessage
+    }),
     {} 
 )(reduxForm({
     form: 'login',
