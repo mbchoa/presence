@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "gulp build"
+    "build": "gulp build",
+    "start": "yarn run build && node build/server.js"
   },
   "author": "Michael-Bryant Choa",
   "license": "MIT",

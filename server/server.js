@@ -16,8 +16,13 @@ const app = express();
 mongoose.Promise = global.Promise;
 mongoose.connect(DB_URI);
 
-// setup redis session store
+// create Redis session store
 const RedisStore = connectRedis(session);
+const redisSessionStore = new RedisStore({
+    client: redis.createClient(),
+    host: 'localhost',
+    port: REDIS_PORT
+});
 
 // setup express middleware
 app.use(cors({ 
@@ -28,14 +33,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({
     name: 'session-id',
-    store: new RedisStore({
-        client: redis.createClient(),
-        host: 'localhost',
-        port: REDIS_PORT,
-    }),
+    store: redisSessionStore,
     resave: false,
     saveUninitialized: false,
     secret: SESSION_SECRET,
+    cookie: {
+        maxAge: 86400000
+    }
 }));
 
 app.post('/signup', authMiddleware, (req, res) => {
@@ -105,6 +109,22 @@ app.post('/login', authMiddleware, (req, res) => {
                 });
             })
         })
+});
+
+app.get('/checkAuth', (req, res) => {
+    redisSessionStore.get(req.session.id, (err, session) => {
+        if (err) return res.status(400).send({
+            result: { isAuthenticated: false }
+        });
+
+        if (session) return res.status(200).send({ 
+            result: { isAuthenticated: true }
+        });
+
+        res.status(200).send({
+            result: { isAuthenticated: false }
+        });
+    });
 });
 
 app.listen(PORT, () => {
