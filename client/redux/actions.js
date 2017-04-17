@@ -136,8 +136,7 @@ export function logoutUser () {
         };
 
         fetch('http://localhost:3000/logout', options)
-            .then(response => response.json())
-            .then(({ result }) => {
+            .then(() => {
                 dispatch(setIsAuthenticated(false));
             });
     };
