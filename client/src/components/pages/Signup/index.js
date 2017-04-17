@@ -16,6 +16,7 @@ class SignupPage extends Component {
         const { dispatch, history } = this.props;
         dispatch(registerUser(data))
             .then(() => {
+                // TODO: don't redirect if there was an error signing up for account
                 history.push('/login');
             });
     }
