@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { registerUser } from '../../../../redux/actions';
 import styles from './styles.css';
@@ -12,8 +13,11 @@ class SignupPage extends Component {
     }
 
     _submit(data) {
-        const { dispatch } = this.props;
-        dispatch(registerUser(data));
+        const { dispatch, history } = this.props;
+        dispatch(registerUser(data))
+            .then(() => {
+                history.push('/login');
+            });
     }
 
     render() {
@@ -44,7 +48,6 @@ class SignupPage extends Component {
     }
 }
 
-export default connect(
-    ({ root }) => ({ signUpError: root.signUpError }),
-    {}
-)(reduxForm({ form: 'signup' })(SignupPage));
+export default withRouter(connect(
+    ({ root }) => ({ signUpError: root.signUpError })
+)(reduxForm({ form: 'signup' })(SignupPage)));
