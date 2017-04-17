@@ -127,6 +127,13 @@ app.get('/checkAuth', (req, res) => {
     });
 });
 
+app.post('/logout', (req, res) => {
+    redisSessionStore.destroy(req.session.id, err => {
+        if (err) return res.status(400).send();
+        res.status(200).send();
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`Started server listening on port ${ PORT }`);
 });
