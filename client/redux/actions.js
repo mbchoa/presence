@@ -1,11 +1,10 @@
-import { getSessionId, setSessionId } from '../src/helpers/localStorage';
-
 export const NOTIFY_AUTHENTICATION_IN_PROGRESS = 'NOTIFY_AUTHENTICATION_IN_PROGRESS';
 export const NOTIFY_AUTHENTICATION_SUCCESS = 'NOTIFY_AUTHENTICATION_SUCCESS';
 export const NOTIFY_AUTHENTICATION_FAILED = 'NOTIFY_AUTHENTICATION_FAILED';
 export const NOTIFY_SIGN_UP_FAILED = 'NOTIFY_SIGN_UP_FAILED';
 export const NOTIFY_SIGN_UP_SUCCESS = 'NOTIFY_SIGN_UP_SUCCESS';
 export const SAVE_CURRENT_SESSION_TIME = 'SAVE_CURRENT_SESSION_TIME';
+export const SET_IS_AUTHENTICATED = 'SET_IS_AUTHENTICATED';
 
 function notifyAuthenticationFailed(loginErrorMessage) {
     return {
@@ -24,15 +23,6 @@ function notifyAuthenticationSuccess(loginSuccessMessage) {
     return {
         type: NOTIFY_AUTHENTICATION_SUCCESS,
         loginSuccessMessage
-    };
-}
-
-
-export function checkUserSession() {
-    return dispatch => {
-        if (getSessionId()) {
-            dispatch(notifyAuthenticationSuccess('Session exists already!'));
-        }
     };
 }
 
@@ -59,7 +49,6 @@ export function loginUser({ email, password }) {
                 if (error) {
                     return dispatch(notifyAuthenticationFailed(error));
                 }
-                setSessionId(userId);
                 dispatch(notifyAuthenticationSuccess(successMsg));
             });
     }
@@ -108,5 +97,30 @@ export function notifySignUpSuccess(success) {
     return {
         type: NOTIFY_SIGN_UP_SUCCESS,
         success
+    };
+}
+
+export function checkAuth() {
+    return dispatch => {
+        const options = {
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            method: 'get'
+        }
+
+        return fetch('http://localhost:3000/checkAuth', options)
+            .then(response => response.json())
+            .then(({ result }) => {
+                dispatch(setIsAuthenticated(result.isAuthenticated));
+            });
+    };
+}
+
+function setIsAuthenticated(isAuthenticated) {
+    return {
+        type: SET_IS_AUTHENTICATED,
+        isAuthenticated
     };
 }
