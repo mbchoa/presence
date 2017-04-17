@@ -124,3 +124,21 @@ function setIsAuthenticated(isAuthenticated) {
         isAuthenticated
     };
 }
+
+export function logoutUser () {
+    return dispatch => {
+        const options = {
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            method: 'post'
+        };
+
+        fetch('http://localhost:3000/logout', options)
+            .then(response => response.json())
+            .then(({ result }) => {
+                dispatch(setIsAuthenticated(false));
+            });
+    };
+}
