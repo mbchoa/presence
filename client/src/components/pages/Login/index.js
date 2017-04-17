@@ -4,7 +4,6 @@ import { Field, reduxForm } from 'redux-form';
 import { Redirect } from 'react-router-dom';
 
 import { loginUser } from '../../../../redux/actions';
-import { getSessionId } from '../../../helpers/localStorage';
 
 import styles from './styles.css';
 
@@ -16,7 +15,7 @@ class LoginPage extends Component {
 
     _submit(data) {
         const { dispatch } = this.props;
-        dispatch(loginUser(data))
+        dispatch(loginUser(data));
     }
 
     render() {
@@ -71,8 +70,7 @@ export default connect(
     ({ root }) => ({ 
         isAuthenticated: root.isAuthenticated,
         loginErrorMessage: root.loginErrorMessage
-    }),
-    {} 
+    })
 )(reduxForm({
     form: 'login',
 })(LoginPage));

@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Redirect, Route, withRouter } from 'react-router';
-
-import { getSessionId } from '../helpers/localStorage';
 
 class PrivateRoute extends Component {
     render() {
         const { 
             component,
+            isAuthenticated,
             ...rest 
         } = this.props;
 
         return (
             <Route { ...rest } render={ props => (
-                getSessionId() ? (
+                isAuthenticated ? (
                     React.createElement(component, props)
                 ) : (
                     <Redirect to={{
@@ -25,4 +25,6 @@ class PrivateRoute extends Component {
     }
 }
 
-export default withRouter(PrivateRoute);
+export default withRouter(connect(
+    ({ root }) => ({ isAuthenticated: root.isAuthenticated })
+)(PrivateRoute));

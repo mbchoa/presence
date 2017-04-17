@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
 import {
     BrowserRouter as Router,
     Route,
@@ -19,10 +18,6 @@ import NavBar from './components/NavBar';
 import './styles.css';
 
 class App extends Component {
-    componentDidMount () {
-        
-    }
-
     render () {
         return (
             <Router>
