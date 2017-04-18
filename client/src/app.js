@@ -27,7 +27,7 @@ class App extends Component {
                         <Route exact path="/" component={HomePage} />
                         <Route path="/signup" component={SignupPage} />
                         <Route path="/login" component={LoginPage} />
-                        <Route path="/stopwatch" component={StopWatchPage} />
+                        <PrivateRoute path="/stopwatch" component={StopWatchPage} />
                         <PrivateRoute exact path="/history" component={HistoryPage} />
                         <PrivateRoute path="/history/:month" component={MonthDetail} />
                         <Route component={NotFoundPage} />
