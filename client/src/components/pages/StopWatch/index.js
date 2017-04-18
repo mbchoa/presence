@@ -51,6 +51,13 @@ class StopWatchPage extends Component {
         this.setState({ elapsedMs: this.props.currentSessionTime });
     }
     
+    componentWillUnmount() {
+        const { saveTime } = this.props;
+
+        this.timer.stop();
+        saveTime(this.state.elapsedMs);
+    }
+
     render() {
         const { isStarted } = this.timer;
         const { elapsedMs } = this.state;
