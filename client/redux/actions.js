@@ -54,11 +54,31 @@ export function loginUser({ email, password }) {
     }
 }
 
-export function saveCurrentSessionTime(time) {
-    return {
-        type: SAVE_CURRENT_SESSION_TIME,
-        time
-    }
+export function saveCurrentSessionTime(startTime, endTime) {
+    return dispatch => {
+        dispatch({
+            type: SAVE_CURRENT_SESSION_TIME,
+            time: endTime - startTime
+        });
+ 
+        const options = {
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            method: 'post',
+            body: JSON.stringify({
+                startTime,
+                endTime
+            })
+        };
+
+        return fetch('http://localhost:3000/saveSession', options)
+            .then(response => response.json())
+            .then(({ result }) => {
+                // TODO: do something with result
+            });
+    };
 }
 
 export function registerUser ({ email, password }) {

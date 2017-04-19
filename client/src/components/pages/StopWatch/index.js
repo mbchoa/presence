@@ -34,9 +34,10 @@ class StopWatchPage extends Component {
 
         if (this.timer.isStarted) {
             this.timer.stop();
-            saveTime(this.state.elapsedMs);
+            saveTime(this.state.startTime, new Date());
         } else {
             this.timer.start();
+            this.setState({ startTime: new Date() });
         }
     }
 
@@ -54,8 +55,10 @@ class StopWatchPage extends Component {
     componentWillUnmount() {
         const { saveTime } = this.props;
 
-        this.timer.stop();
-        saveTime(this.state.elapsedMs);
+        if (this.timer.isStarted) {
+            this.timer.stop();
+            saveTime(this.state.startTime, new Date());
+        }
     }
 
     render() {
