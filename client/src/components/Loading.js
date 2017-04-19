@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import { map, filter, isFunction } from 'lodash';
 
 class Loading extends Component {
     state = {
-        isLoading: false
+        isLoading: true
     };
 
     componentDidMount () {
-        // TODO: fetch data
+        Promise
+            .all(map(filter(this.props, isFunction), value => value()))
+            .then(() => this.setState({ isLoading: false }));
     }
 
     render () {
