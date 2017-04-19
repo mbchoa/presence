@@ -134,6 +134,17 @@ app.post('/logout', (req, res) => {
     });
 });
 
+app.post('/saveSession', (req, res) => {
+    UserModel
+        .findOne({ _id: req.session.user_id })
+        .then(user => {
+            user.saveSession(req.body, (err, success) => {
+                if (err) return res.status(400).send(err);
+                res.status(200).send(success);
+            })
+        });
+});
+
 app.listen(PORT, () => {
     console.log(`Started server listening on port ${ PORT }`);
 });

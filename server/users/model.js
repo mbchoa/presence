@@ -15,7 +15,10 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    
+    sessions: [{ 
+        startTime: { type: Date },
+        endTime: { type: Date },
+    }],
 }, { timestamps: true });
 
 UserSchema.pre('save', function(next) {
@@ -28,11 +31,19 @@ UserSchema.pre('save', function(next) {
     });
 });
 
-UserSchema.methods.comparePassword = function(inputPassword, callback) {
+UserSchema.methods.comparePassword = function compare (inputPassword, callback) {
     comparePassword(this.password, inputPassword, (err, res) => {
         if (err) return callback(err);
         callback(null, res);
     });
 };
 
+UserSchema.methods.saveSession = function saveSession (session, callback) {
+    this.sessions.push(session);
+
+    this.save()
+        .then(user => {
+            callback(null, { result: 'Saved daimoku session!' });
+        }, callback)
+}
 export default mongoose.model('User', UserSchema);
