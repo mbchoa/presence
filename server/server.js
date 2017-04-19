@@ -145,6 +145,11 @@ app.post('/saveSession', (req, res) => {
         });
 });
 
+app.get('/month/:month', (req, res) => {
+    // TODO: fetch data for month
+    res.status(200).send('Send request for month data');
+});
+
 app.listen(PORT, () => {
     console.log(`Started server listening on port ${ PORT }`);
 });
