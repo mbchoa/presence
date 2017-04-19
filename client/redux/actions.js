@@ -161,3 +161,21 @@ export function logoutUser () {
             });
     };
 }
+
+export function getMonthSessions (month) {
+    return dispatch => {
+        const options = {
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            method: 'get'
+        };
+
+        console.log('Retrieving month data for...', month);
+        return fetch(`http://localhost:3000/month/${ month }`, options)
+            .then(() => {
+                // TODO: save month data in state
+            });
+    }
+}
