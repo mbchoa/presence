@@ -1,11 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { partial } from 'lodash';
 
+import { getMonthSessions } from '../../../../redux/actions';
 import Loading from '../../Loading';
 
-const MonthDetail = (props) => (
+const MonthDetail = ({ getMonthSessions, match }) => (
     <div className="month-detail">
-        <h1 className="month-detail__title">{ props.match.params.month } 2017</h1>
-        <Loading>
+        <h1 className="month-detail__title">{ match.params.month } 2017</h1>
+        <Loading { ...{ 
+            getMonthSessions: partial(getMonthSessions, match.params.month) 
+        } }>
             <h3 className="month-detail__month-total">Month Total</h3>
             <label>3 hours 4 minutes</label>
             <ul className="month-detail__days">
@@ -38,4 +43,7 @@ const MonthDetail = (props) => (
     </div>
 );
 
-export default MonthDetail;
+export default connect(
+    null,
+    { getMonthSessions }
+)(MonthDetail);
