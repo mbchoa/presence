@@ -12,6 +12,7 @@
   ],
   "plugins": [
     "react-hot-loader/babel",
-    "transform-function-bind"
+    "transform-function-bind",
+    "date-fns"
   ]
 }
