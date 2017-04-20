@@ -5,6 +5,8 @@ import express from 'express';
 import session from 'express-session';
 import mongoose from 'mongoose';
 import redis from 'redis';
+import { filter, toLower } from 'lodash';
+import { format } from 'date-fns';
 
 import { DB_URI, PORT, REDIS_PORT, SESSION_SECRET } from './config';
 import { UserModel } from './users';
@@ -146,8 +148,15 @@ app.post('/saveSession', (req, res) => {
 });
 
 app.get('/month/:month', (req, res) => {
-    // TODO: fetch data for month
-    res.status(200).send('Send request for month data');
+    UserModel
+        .findOne({ _id: req.session.user_id })
+        .then(user => {
+            res.status(200).send({
+                sessions: filter(user.sessions, ({ startTime }) =>
+                    toLower(format(startTime, 'MMMM')) === toLower(req.params.month)
+                )
+            });
+        });
 });
 
 app.listen(PORT, () => {
