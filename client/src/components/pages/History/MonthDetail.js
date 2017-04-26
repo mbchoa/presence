@@ -44,9 +44,9 @@ class MonthDetail extends Component {
                         { this.renderTime(formattedTotalTime) }
                         <ul className="month-detail__days">
                             {
-                                map(formattedSessions, ({ formattedTime, startTime }) => {
+                                map(formattedSessions, ({ formattedTime, startTime }, key) => {
                                     return (
-                                        <li className="month-detail__day">
+                                        <li key={key} className="month-detail__day">
                                             <div className="month-detail__day-date">
                                                 <h3>{ format(startTime, 'MMMM D') }</h3>
                                                 <h5>{ format(startTime, 'h:mm a') }</h5>

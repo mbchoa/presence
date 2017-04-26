@@ -190,7 +190,6 @@ export function getMonthSessions (month) {
 }
 
 function setMonthSessions (monthData) {
-    console.log('setMonthSessions', monthData);
     return {
         type: SET_MONTH_SESSIONS,
         ...monthData,
