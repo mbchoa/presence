@@ -26,13 +26,17 @@
 }
 
 .month-detail {
-    width: 960px;
+    width: 360px;
     margin: 0 auto;
 
     &__title {
         padding-top: 50px;
         text-align: center;
         text-transform: capitalize;
+    }
+
+    &__month-total {
+        padding-top: 40px;
     }
 
     &__days {
@@ -42,6 +46,18 @@
     }
     
     &__day {
-        padding-top: 5px;
+        padding-top: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    &__day-date {
+        display: inline-block;
+        margin-right: 20px;
+    }
+
+    &__day-duration {
+        display: inline-block;
+        font-size: 24px;
     }
 }

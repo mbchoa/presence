@@ -4,7 +4,10 @@ export const NOTIFY_AUTHENTICATION_FAILED = 'NOTIFY_AUTHENTICATION_FAILED';
 export const NOTIFY_SIGN_UP_FAILED = 'NOTIFY_SIGN_UP_FAILED';
 export const NOTIFY_SIGN_UP_SUCCESS = 'NOTIFY_SIGN_UP_SUCCESS';
 export const SAVE_CURRENT_SESSION_TIME = 'SAVE_CURRENT_SESSION_TIME';
+export const SET_MONTH_SESSIONS = 'SET_MONTH_SESSIONS';
 export const SET_IS_AUTHENTICATED = 'SET_IS_AUTHENTICATED';
+
+import Sessions from '../api/models/Sessions';
 
 function notifyAuthenticationFailed(loginErrorMessage) {
     return {
@@ -174,8 +177,22 @@ export function getMonthSessions (month) {
 
         console.log('Retrieving month data for...', month);
         return fetch(`http://localhost:3000/month/${ month }`, options)
-            .then(() => {
-                // TODO: save month data in state
+            .then(response => response.json())
+            .then(({ sessions }) => {
+                const session = new Sessions(sessions);
+
+                dispatch(setMonthSessions({
+                    monthSessions: session.formatSessionTimes(),
+                    monthTotalTime: session.calculateTotalTime(),
+                }));
             });
     }
+}
+
+function setMonthSessions (monthData) {
+    console.log('setMonthSessions', monthData);
+    return {
+        type: SET_MONTH_SESSIONS,
+        ...monthData,
+    };
 }

@@ -5,7 +5,8 @@ import {
     NOTIFY_SIGN_UP_FAILED,
     NOTIFY_SIGN_UP_SUCCESS,
     SAVE_CURRENT_SESSION_TIME,
-    SET_IS_AUTHENTICATED
+    SET_MONTH_SESSIONS,
+    SET_IS_AUTHENTICATED,
 } from './actions';
 
 export default function rootReducer(state = {}, action) {
@@ -55,6 +56,13 @@ export default function rootReducer(state = {}, action) {
             return {
                 ...state,
                 isAuthenticated: action.isAuthenticated
+            };
+            
+        case SET_MONTH_SESSIONS:
+            return {
+                ...state,
+                monthSessions: action.monthSessions,
+                monthTotalTime: action.monthTotalTime,
             };
             
         default:
