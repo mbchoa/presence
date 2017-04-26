@@ -39,19 +39,25 @@ class MonthDetail extends Component {
                 <h1 className="month-detail__title">{ match.params.month } 2017</h1>
                 { !monthSessions
                     ? <h3>Loading...</h3>
-                    : <div>
-                        <h3 className="month-detail__month-total">Month Total</h3>
-                        { this.renderTime(formattedTotalTime) }
+                    : <div className="month-detail__content">
+                        <div className="month-detail__month-total">
+                            <h3 className="month-detail__month-total-header">
+                                Month Total
+                            </h3>
+                            <div className="month-detail__duration">
+                                { this.renderTime(formattedTotalTime) }
+                            </div>
+                        </div>
                         <ul className="month-detail__days">
                             {
                                 map(formattedSessions, ({ formattedTime, startTime }, key) => {
                                     return (
                                         <li key={key} className="month-detail__day">
-                                            <div className="month-detail__day-date">
+                                            <div className="month-detail__date">
                                                 <h3>{ format(startTime, 'MMMM D') }</h3>
                                                 <h5>{ format(startTime, 'h:mm a') }</h5>
                                             </div>
-                                            <div className="month-detail__day-duration">
+                                            <div className="month-detail__duration">
                                                 { this.renderTime(formattedTime) }
                                             </div>
                                         </li>
