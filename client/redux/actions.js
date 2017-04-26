@@ -9,6 +9,8 @@ export const SET_IS_AUTHENTICATED = 'SET_IS_AUTHENTICATED';
 
 import Sessions from '../api/models/Sessions';
 
+const MIN_SAVE_TIME_DURATION = 60000;
+
 function notifyAuthenticationFailed(loginErrorMessage) {
     return {
         type: NOTIFY_AUTHENTICATION_FAILED,
@@ -59,6 +61,10 @@ export function loginUser({ email, password }) {
 
 export function saveCurrentSessionTime(startTime, endTime) {
     return dispatch => {
+        if (endTime - startTime < MIN_SAVE_TIME_DURATION) {
+            return;
+        }
+
         dispatch({
             type: SAVE_CURRENT_SESSION_TIME,
             time: endTime - startTime
