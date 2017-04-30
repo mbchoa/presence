@@ -20,8 +20,7 @@ Local webpack dev server will now be started at `http://localhost:8080`.
 4. Run `redis-server` to start up Redis server
 5. Run `mongod` to start up MongoDB server
 6. Run `npm install` to install npm modules 
-7. Run `npm run build` to build `server.js`
-8. Run `node build/server.js` to start server
+7. Run `npm start` to build and start backend server
 
 Express server with redis and mongo clients will now be started at `http://localhost:3000`.
 
