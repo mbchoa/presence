@@ -8,7 +8,15 @@ import redis from 'redis';
 import { filter, toLower } from 'lodash';
 import { format } from 'date-fns';
 
-import { DB_URI, PORT, REDIS_PORT, SESSION_SECRET } from './config';
+import { 
+    BACKEND_PORT, 
+    DB_URI, 
+    FRONTEND_HOST,
+    FRONTEND_PORT,
+    REDIS_HOST,
+    REDIS_PORT, 
+    SESSION_SECRET 
+} from '../config';
 import { UserModel } from './users';
 import authMiddleware from './middleware/auth';
 
@@ -22,14 +30,14 @@ mongoose.connect(DB_URI);
 const RedisStore = connectRedis(session);
 const redisSessionStore = new RedisStore({
     client: redis.createClient(),
-    host: 'localhost',
+    host: REDIS_HOST,
     port: REDIS_PORT
 });
 
 // setup express middleware
 app.use(cors({ 
     credentials: true,
-    origin: 'http://localhost:8080',
+    origin: `http://${FRONTEND_HOST}:${FRONTEND_PORT}`,
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -159,8 +167,8 @@ app.get('/month/:month', (req, res) => {
         });
 });
 
-app.listen(PORT, () => {
-    console.log(`Started server listening on port ${ PORT }`);
+app.listen(BACKEND_PORT, () => {
+    console.log(`Started server listening on port ${ BACKEND_PORT }`);
 });
 
 export default app;
