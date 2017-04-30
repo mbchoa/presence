@@ -49,8 +49,9 @@
     }
 
     &__days {
-        padding-top: 20px;
-        margin: 0;
+        margin-top: 20px;
+        max-height: 400px;
+        overflow: auto;
         list-style-type: none;
     }
     
