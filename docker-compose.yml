@@ -1,0 +1,30 @@
+version: '2'
+services:
+  frontend:
+    build: './client'
+    depends_on:
+      - backend
+    ports:
+      - 4000:4000
+    environment:
+      FRONTEND_PORT: 4000
+  backend:
+    build: './server'
+    depends_on:
+      - redis
+      - mongo
+    ports:
+      - 3000:3000
+    environment:
+      BACKEND_PORT: 3000
+      DB_URI: 'mongodb://mongo:27017/presence'
+      REDIS_HOST: 'redis'
+      REDIS_PORT: 6379
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - 6379:6379
+  mongo:
+    image: 'mongo:latest'
+    ports:
+      - 27017:27017
