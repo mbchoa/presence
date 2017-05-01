@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --hot --history-api-fallback --open",
-    "build": "webpack -p --config webpack.prod.config.js --progress"
+    "copy": "cp index.html dist/index.html",
+    "build": "webpack -p --config webpack.prod.config.js --progress && npm run copy",
+    "start": "node express-server.js"
   },
   "repository": "git@github.com:mbchoa/presence.git",
   "author": "Michael-Bryant Choa <michael-bryant.choa@hautelook.com>",

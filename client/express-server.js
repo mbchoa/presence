@@ -11,6 +11,6 @@ app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-app.listen(process.env.FRONTEND_PORT || , function () {
-    console.log('Production Express server running at 4000');
+app.listen(process.env.FRONTEND_PORT || 4000, function () {
+    console.log('Production Express server running at ' + this.address().port);
 });
