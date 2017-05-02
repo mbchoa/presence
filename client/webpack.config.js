@@ -44,5 +44,13 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('styles.css'),
-  ]
+  ],
+  devServer: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:3000",
+        pathRewrite: { "^/api": "" }
+      }
+    }
+  }
 }
