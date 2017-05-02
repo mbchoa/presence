@@ -1,4 +1,5 @@
 module.exports = {
+    BACKEND_HOST: process.env.BACKEND_HOST || 4000,
     BACKEND_PORT: process.env.BACKEND_PORT || 3000,
     DB_URI: process.env.DB_URI || 'mongodb://localhost:27017/presence',
     FRONTEND_HOST: process.env.FRONTEND_HOST || 'localhost',

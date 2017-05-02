@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
-    "start": "yarn run build && node build/server.js"
+    "start": "node build/server.js"
   },
   "author": "Michael-Bryant Choa",
   "license": "MIT",
@@ -16,6 +16,7 @@
     "date-fns": "^1.28.3",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
+    "http-proxy-middleware": "^0.17.4",
     "mongoose": "^4.9.2",
     "redis": "^2.7.1"
   },

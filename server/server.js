@@ -24,7 +24,10 @@ const app = express();
 
 // connect to mongodb database
 mongoose.Promise = global.Promise;
-mongoose.connect(DB_URI);
+mongoose.connect(DB_URI).then(
+    () => { console.log('Connected to MongoDB')},
+    err => { console.log('Error attempting to connect to MongoDB', err) }
+);
 
 // create Redis session store
 const RedisStore = connectRedis(session);
@@ -122,6 +125,11 @@ app.post('/login', authMiddleware, (req, res) => {
 });
 
 app.get('/checkAuth', (req, res) => {
+    if (!req.session) {
+        return res.status(401).send({
+            result: { isAuthenticated: false }
+        });
+    }
     redisSessionStore.get(req.session.id, (err, session) => {
         if (err) return res.status(400).send({
             result: { isAuthenticated: false }

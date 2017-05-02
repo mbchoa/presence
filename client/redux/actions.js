@@ -48,7 +48,7 @@ export function loginUser({ email, password }) {
             }),
         };
 
-        return fetch('http://localhost:3000/login', options)
+        return fetch('/api/login', options)
             .then(response => response.json())
             .then(({ error, successMsg, userId }) => {
                 if (error) {
@@ -82,7 +82,7 @@ export function saveCurrentSessionTime(startTime, endTime) {
             })
         };
 
-        return fetch('http://localhost:3000/saveSession', options)
+        return fetch('/api/saveSession', options)
             .then(response => response.json())
             .then(({ result }) => {
                 // TODO: do something with result
@@ -104,7 +104,7 @@ export function registerUser ({ email, password }) {
             }),
         };
 
-        return fetch('http://localhost:3000/signup', options)
+        return fetch('/api/signup', options)
             .then(response => response.json())
             .then(({ error, successMsg }) => {
                 if (error) {
@@ -139,7 +139,7 @@ export function checkAuth() {
             method: 'get'
         }
 
-        return fetch('http://localhost:3000/checkAuth', options)
+        return fetch('/api/checkAuth', options)
             .then(response => response.json())
             .then(({ result }) => {
                 dispatch(setIsAuthenticated(result.isAuthenticated));
@@ -164,7 +164,7 @@ export function logoutUser () {
             method: 'post'
         };
 
-        fetch('http://localhost:3000/logout', options)
+        fetch('/api/logout', options)
             .then(() => {
                 dispatch(setIsAuthenticated(false));
             });
@@ -182,7 +182,7 @@ export function getMonthSessions (month) {
         };
 
         console.log('Retrieving month data for...', month);
-        return fetch(`http://localhost:3000/month/${ month }`, options)
+        return fetch(`/api/month/${ month }`, options)
             .then(response => response.json())
             .then(({ sessions }) => {
                 const session = new Sessions(sessions);

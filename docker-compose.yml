@@ -7,6 +7,8 @@ services:
     ports:
       - 4000:4000
     environment:
+      BACKEND_HOST: 'backend'
+      BACKEND_PORT: 3000
       FRONTEND_PORT: 4000
   backend:
     build: './server'
@@ -18,6 +20,8 @@ services:
     environment:
       BACKEND_PORT: 3000
       DB_URI: 'mongodb://mongo:27017/presence'
+      FRONTEND_HOST: 'frontend'
+      FRONTEND_PORT: 4000
       REDIS_HOST: 'redis'
       REDIS_PORT: 6379
   redis:
