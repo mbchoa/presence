@@ -4,9 +4,6 @@ FROM node:alpine
 RUN mkdir -p /usr/src/backend
 WORKDIR /usr/src/backend
 
-# Install native dependencies
-RUN apk add --no-cache make gcc g++ python
-
 # Install backend dependencies and build bundle
 COPY . /usr/src/backend
 RUN npm install && npm run build
