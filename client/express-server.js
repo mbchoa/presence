@@ -15,6 +15,10 @@ app.use('/api', proxy({
     }
 }));
 
+app.get('*', function (req, res) {
+    res.sendFile(__dirname + '/index.html');
+});
+
 app.listen(process.env.FRONTEND_PORT || 4000, function () {
     console.log('Production Express server running at ' + this.address().port);
 });
