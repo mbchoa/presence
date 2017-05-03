@@ -9,7 +9,7 @@
   "author": "Michael-Bryant Choa",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^1.0.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.1",
     "connect-redis": "^3.2.0",
     "cors": "^2.8.3",

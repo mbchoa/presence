@@ -32,9 +32,10 @@ mongoose.connect(DB_URI).then(
 // create Redis session store
 const RedisStore = connectRedis(session);
 const redisSessionStore = new RedisStore({
-    client: redis.createClient(),
-    host: REDIS_HOST,
-    port: REDIS_PORT
+    client: redis.createClient({
+        host: REDIS_HOST,
+        port: REDIS_PORT,
+    }),
 });
 
 // setup express middleware
@@ -77,7 +78,6 @@ app.post('/signup', authMiddleware, (req, res) => {
 
             newUser.save()
                 .then(user => {
-                    console.log('Created new user');
                     return res.status(200).send({
                         successMsg: 'Created new user!'
                     });
@@ -106,15 +106,17 @@ app.post('/login', authMiddleware, (req, res) => {
             }
 
             user.comparePassword(password, (err, isMatch) => {
-                if (err) return res.status(400).send({
-                    error: 'Error validating password. Please try again',
-                });
+                if (err) {
+                    return res.status(400).send({
+                        error: 'Error validating password. Please try again',
+                    });
+                }
 
                 // TODO:  add max retry attempts
                 if (!isMatch) return res.status(400).send({
                     error: 'Invalid password, Please try again',
                 });
-
+                
                 req.session.user_id = user._id;
                 res.status(200).send({
                     successMsg: 'User logged in!',
