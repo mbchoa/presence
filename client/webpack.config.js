@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
@@ -8,7 +9,7 @@ module.exports = {
     'app': [
       'react-hot-loader/patch',
       './src/index'
-    ]
+    ],
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -44,6 +45,19 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('styles.css'),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'lib',
+      minChunks: function minChunks (module) {
+        return module.context && module.context.indexOf('node_modules') !== -1;
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest'
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index-template.html'
+    })
   ],
   devServer: {
     proxy: {
