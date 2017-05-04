@@ -4,13 +4,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: {
-    'app': './src/index'
-  },
+  devtool: 'source-map',
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[chunkhash].js',
-    publicPath: '/'
+    path: path.resolve(__dirname, './dist'),
   },
   module: {
     rules: [

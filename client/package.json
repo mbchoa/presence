@@ -4,9 +4,8 @@
   "description": "Daimoku tracker",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --hot --history-api-fallback --open",
-    "copy": "cp index.html dist/index.html",
-    "build": "webpack -p --config webpack.prod.config.js --progress",
+    "dev": "webpack-dev-server --env=dev --hot --history-api-fallback --progress --profile --colors --open",
+    "build": "webpack --env=prod --progress --colors",
     "start": "node express-server.js"
   },
   "repository": "git@github.com:mbchoa/presence.git",
@@ -44,6 +43,7 @@
     "react-hot-loader": "next",
     "style-loader": "^0.15.0",
     "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.2"
+    "webpack-dev-server": "^2.4.2",
+    "webpack-merge": "^4.1.0"
   }
 }
