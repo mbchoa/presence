@@ -28,9 +28,11 @@ class NavBar extends Component {
 
         return (
             <Toolbar>
-                <ToolbarTitle text="Presence" style={{
-                    color: white
-                }} />
+                <Link to="/" style={{ textDecoration: 'none' }}>
+                    <ToolbarTitle text="Presence" style={{
+                        color: white
+                    }} />
+                </Link>
                 <ToolbarGroup>
                     { isAuthenticated && [
                         <FlatButtonLink
