@@ -2,23 +2,28 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Redirect } from 'react-router-dom';
+import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import { blueGrey600 } from 'material-ui/styles/colors';
 
 import { loginUser } from '../../../../redux/actions';
 
 import styles from './styles.css';
 
 class LoginPage extends Component {
-    constructor() {
+    constructor () {
         super();
         this._submit = this._submit.bind(this);
     }
 
-    _submit(data) {
+    _submit (data) {
         const { dispatch } = this.props;
         dispatch(loginUser(data));
     }
 
-    render() {
+    render () {
         const { 
             handleSubmit, 
             isAuthenticated, 
@@ -27,39 +32,51 @@ class LoginPage extends Component {
         const { from } = this.props.location.state || { from: { pathname: '/' } };
 
         if (isAuthenticated) {  
-            return (
-                <Redirect to={ from } />
-            );
+            return <Redirect to={ from } />;
         }
-
-        const modalErrorClass = loginErrorMessage
-            ? 'modal__error modal__error--active'
-            : 'modal__error';
 
         return (
             <div className="login">
                 <div className="login__modal">
-                    <div className="modal">
-                        <header className="modal__header">Welcome back.</header>
+                    <Paper className="modal">
+                        <Toolbar>
+                            <ToolbarTitle 
+                                text="Welcome back." 
+                                style={{ color: 'white '}} />
+                        </Toolbar>
                         <div className="modal__form">
-                            <form onSubmit={ handleSubmit(this._submit) }>
-                                <p className="modal__label">Email</p>
-                                <Field 
-                                    className="modal__input" 
-                                    name="email" 
-                                    component="input" 
-                                    type="text" />
-                                <p className="modal__label">Password</p>
-                                <Field 
-                                    className="modal__input" 
-                                    name="password" 
-                                    component="input" 
-                                    type="password" />
-                                <p className={ modalErrorClass }>{ loginErrorMessage }</p>
-                                <button type="submit" className="modal__submit">Login</button>
-                            </form>
+                            <TextField {...{
+                                floatingLabelText: 'Email',
+                                floatingLabelFocusStyle: {
+                                    color: blueGrey600
+                                },
+                                fullWidth: true,
+                                inputStyle: {
+                                    color: 'black'
+                                },
+                                underlineFocusStyle: {
+                                    borderColor: blueGrey600
+                                }
+                            }} />
+                            <TextField {...{
+                                floatingLabelText: 'Password',
+                                floatingLabelFocusStyle: {
+                                    color: blueGrey600
+                                },
+                                fullWidth: true,
+                                inputStyle: {
+                                    color: 'black'
+                                },
+                                type: 'password',
+                                underlineFocusStyle: {
+                                    borderColor: blueGrey600
+                                }
+                            }} />
+                            <RaisedButton 
+                                label="Login"
+                                fullWidth={true} />
                         </div>
-                    </div>
+                    </Paper>
                 </div>
             </div>
         );

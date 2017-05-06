@@ -14,7 +14,6 @@ export default {
         accent2Color: blueGrey400,
         accent3Color: blueGrey900,
         textColor: white,
-        alternateTextColor: fullBlack,
-        shadowColor: fullBlack,
-    },
+        alternateTextColor: blueGrey400
+    }
 };

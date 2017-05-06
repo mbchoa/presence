@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { format } from 'date-fns';
 import { 
     Toolbar,
@@ -23,6 +23,7 @@ class NavBar extends Component {
         const {
             currentMonth,
             isAuthenticated,
+            location: { pathname },
             logoutUser
         } = this.props;
 
@@ -55,25 +56,27 @@ class NavBar extends Component {
                             }}
                         />
                     ]}
-                    { !isAuthenticated && [
+                    { !isAuthenticated &&
                         <FlatButtonLink 
                             key="signup" 
                             label="Signup" 
                             to="/signup" 
-                        />,
+                        />
+                    }
+                    { pathname !== '/login' &&
                         <FlatButtonLink 
                             key="login"
                             label="Login" 
                             to="/login" 
                         />
-                    ]}
+                    }
                 </ToolbarGroup>
             </Toolbar>
         );
     }
 }
 
-export default connect(
+export default withRouter(connect(
     ({ root }) => ({ isAuthenticated: root.isAuthenticated }),
     { logoutUser }
-)(NavBar);
+)(NavBar));
