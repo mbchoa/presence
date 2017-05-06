@@ -1,41 +1,75 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
+import { 
+    Toolbar,
+    ToolbarGroup,
+    ToolbarTitle
+} from 'material-ui/Toolbar';
+import FlatButton from 'material-ui/FlatButton';
+import { white } from 'material-ui/styles/colors';
 
 import { logoutUser } from '../../redux/actions';
 
-const NavBar = ({ isAuthenticated, logoutUser }) => {
-    const currentMonth = format(new Date(), 'MMMM');
+import FlatButtonLink from './FlatButtonLink';
 
-    return (
-        <ul className="navbar">
-            <li key={0} className="navbar__link"><Link to="/">Home</Link></li>
-            { isAuthenticated &&
-                [
-                    <li key={1} className="navbar__link"><Link to="/history">History</Link></li>,
-                    <li key={2} className="navbar__link">
-                        <Link to={`/history/${currentMonth}`}>{ currentMonth }</Link>
-                    </li>,
-                    <li key={3} className="navbar__link"><Link to="/stopwatch">Stopwatch</Link></li>
-                ]
-            }
-            { !isAuthenticated && 
-                [
-                    <li key={4} className="navbar__link"><Link to="/signup">Signup</Link></li>,
-                    <li key={5} className="navbar__link">
-                        <Link to="/login">Login</Link>
-                    </li> 
-                ]
-            }
-            { isAuthenticated && 
-                <li key={6} className="navbar__link">
-                    <button onClick={ logoutUser }>Logout</button>
-                </li> 
-            }
-        </ul>
-    );
-};
+class NavBar extends Component {
+    static defaultProps = {
+        currentMonth: format(new Date(), 'MMMM')
+    };
+
+    render () {
+        const {
+            currentMonth,
+            isAuthenticated,
+            logoutUser
+        } = this.props;
+
+        return (
+            <Toolbar>
+                <ToolbarTitle text="Presence" style={{
+                    color: white
+                }} />
+                <ToolbarGroup>
+                    { isAuthenticated && [
+                        <FlatButtonLink
+                            key="stopwatch"
+                            label="Stopwatch"
+                            to="/stopwatch"
+                        />,
+                        <FlatButtonLink 
+                            key="history"
+                            label={ currentMonth }
+                            to={ `/history/${currentMonth}` }
+                        />,
+                        <FlatButton
+                            key="logout"
+                            label="Logout"
+                            onClick={ logoutUser }
+                            style={{
+                                marginLeft: '0px',
+                                marginRight: '0px'
+                            }}
+                        />
+                    ]}
+                    { !isAuthenticated && [
+                        <FlatButtonLink 
+                            key="signup" 
+                            label="Signup" 
+                            to="/signup" 
+                        />,
+                        <FlatButtonLink 
+                            key="login"
+                            label="Login" 
+                            to="/login" 
+                        />
+                    ]}
+                </ToolbarGroup>
+            </Toolbar>
+        );
+    }
+}
 
 export default connect(
     ({ root }) => ({ isAuthenticated: root.isAuthenticated }),

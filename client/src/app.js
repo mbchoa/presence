@@ -16,7 +16,6 @@ import HistoryPage from './components/pages/History';
 import PrivateRoute from './components/PrivateRoute';
 import NotFoundPage from './components/NotFoundPage';
 import NavBar from './components/NavBar';
-import MaterialPage from './components/pages/Material';
 
 import './styles.css';
 import { LightDarkGreyTheme } from './themes';
