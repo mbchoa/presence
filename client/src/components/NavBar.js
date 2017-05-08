@@ -63,7 +63,7 @@ class NavBar extends Component {
                             to="/signup" 
                         />
                     }
-                    { pathname !== '/login' &&
+                    { pathname !== '/login' && !isAuthenticated &&
                         <FlatButtonLink 
                             key="login"
                             label="Login" 
