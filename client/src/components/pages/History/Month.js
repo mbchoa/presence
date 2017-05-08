@@ -1,54 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { format, getDaysInMonth } from 'date-fns';
 
+import { getMonthSessions } from '../../../../redux/actions';
 import Grid from '../../Grid';
-import VRow from '../../VRow';
-import Square from '../../Square';
+import Week from './Week';
 
-const Month = () =>
-    <div className="month">
-        <h1 className="month__title">March</h1>
-        <Grid width="270" height="380">
-            <VRow padding="5">
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-            </VRow>
-            <VRow transform="translate(55, 0)" padding="5">
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-            </VRow>
-            <VRow transform="translate(110, 0)" padding="5">
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-            </VRow>
-            <VRow transform="translate(165, 0)" padding="5">
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-            </VRow>
-            <VRow transform="translate(220, 0)" padding="5">
-                <Square width="50" height="50" fill="red" />
-                <Square width="50" height="50" fill="red" />
-            </VRow>
-        </Grid>
-    </div>
+class Month extends Component {
+    componentDidMount () {
+        const { date } = this.props;
+        this.props.getMonthSessions(format(date, 'MMMM'));
+    }
 
-export default Month;
+    render () {
+        const { date } = this.props;
+        const numDaysInMonth = getDaysInMonth(date);
+
+        return (
+            <div className="month">
+                <h1 className="month__title">{ format(date, 'MMMM') }</h1>
+                <Grid width="270" height="380">
+                    <Week data={ [1, 2, 3, 4, 5, 6, 7] } />
+                </Grid>
+            </div>
+        );
+    }
+}
+
+export default connect(
+    ({ root }) => ({
+        monthSessions: root.monthSessions
+    }),
+    { getMonthSessions }
+)(Month);
