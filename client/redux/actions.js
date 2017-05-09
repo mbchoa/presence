@@ -188,6 +188,7 @@ export function getMonthSessions (month) {
                 const session = new Sessions(sessions);
 
                 dispatch(setMonthSessions({
+                    maxDuration: session.getMaxDuration(),
                     monthSessions: session.formatSessionTimes(),
                     monthTotalTime: session.calculateTotalTime(),
                 }));

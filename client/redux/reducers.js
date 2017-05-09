@@ -61,6 +61,7 @@ export default function rootReducer(state = {}, action) {
         case SET_MONTH_SESSIONS:
             return {
                 ...state,
+                maxDuration: action.maxDuration,
                 monthSessions: action.monthSessions,
                 monthTotalTime: action.monthTotalTime,
             };
