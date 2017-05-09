@@ -7,7 +7,7 @@ import {
     isSameDay, 
     startOfMonth 
 } from 'date-fns';
-import { filter, map, memoize, range, slice, sumBy } from 'lodash';
+import { filter, inRange, map, range, slice, sumBy } from 'lodash';
 
 import { getMonthSessions } from '../../../../redux/actions';
 import Grid from '../../Grid';
@@ -16,18 +16,32 @@ import Week from './Week';
 class Month extends Component {
     constructor () {
         super();
-        this.normalizeMonthSessions = memoize(this.normalizeMonthSessions.bind(this));
+        this.calculateFillLevel = this.calculateFillLevel.bind(this);
+        this.normalizeMonthSessions = this.normalizeMonthSessions.bind(this);
+    }
+
+    calculateFillLevel (duration) {
+        const { maxDuration } = this.props;
+        const pct = Math.round(duration / maxDuration);
+
+        if (inRange(pct, 0.2, 0.4)) return 1;
+        if (inRange(pct, 0.4, 0.6)) return 2;
+        if (inRange(pct, 0.6, 0.8)) return 3;
+        if (pct >= 0.8) return 4;
+        return 0;
     }
 
     normalizeMonthSessions () {
         const { date, monthSessions } = this.props;
         return map(range(0, getDaysInMonth(date)), (day, offset) => {
             const dateOffset = addDays(startOfMonth(date), offset);
+            const total = sumBy(filter(monthSessions, ({ startTime }) => 
+                isSameDay(startTime, dateOffset)), 'duration'
+            );
             return {
                 date: dateOffset,
-                total: sumBy(filter(monthSessions, ({ startTime }) => 
-                    isSameDay(startTime, dateOffset)), 'duration'
-                )
+                fillLevel: this.calculateFillLevel(total),
+                total,
             };
         });
     }
@@ -73,6 +87,7 @@ class Month extends Component {
 
 export default connect(
     ({ root }) => ({
+        maxDuration: root.maxDuration,
         monthSessions: root.monthSessions
     }),
     { getMonthSessions }
