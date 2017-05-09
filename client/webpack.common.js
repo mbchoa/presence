@@ -50,6 +50,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index-template.html'
-    })
+    }),
+    new webpack.NamedModulesPlugin()
   ]
 }
