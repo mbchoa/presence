@@ -1,4 +1,17 @@
-import { map, maxBy, reduce } from 'lodash';
+import { 
+    flatMap, 
+    flowRight, 
+    groupBy, 
+    map, 
+    max, 
+    partialRight, 
+    reduce, 
+    sumBy 
+} from 'lodash';
+import { 
+    differenceInMilliseconds,
+    startOfDay
+} from 'date-fns';
 
 import { 
     calculateOverflowTime as formatTimeDuration 
@@ -13,9 +26,15 @@ export default class Sessions {
     }
 
     getMaxDuration () {
-        return maxBy(this.sessions, ({ startTime, endTime }) =>
-            endTime - startTime
-        ) || 0;
+        return flowRight(
+            max,
+            partialRight(flatMap, sessions =>
+                sumBy(sessions, ({ startTime, endTime }) =>
+                    differenceInMilliseconds(endTime, startTime)
+                )
+            ),
+            partialRight(groupBy, ({ startTime }) => startOfDay(startTime))
+        )(this.sessions);
     }
 
     calculateTotalTime () {
