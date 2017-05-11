@@ -4,8 +4,6 @@ services:
     build: './client'
     depends_on:
       - backend
-    ports:
-      - 4000:4000
     environment:
       BACKEND_HOST: 'backend'
       BACKEND_PORT: 3000

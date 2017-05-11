@@ -5,7 +5,7 @@ var proxy = require('http-proxy-middleware');
 
 var app = express();
 
-app.use(express.static('dist'));
+app.use(express.static(path.join(__dirname, 'dist')));
 app.use(cors());
 app.use('/api', proxy({
     target: `http://${process.env.BACKEND_HOST || 'localhost'}:${process.env.BACKEND_PORT || 3000}`,
@@ -16,7 +16,7 @@ app.use('/api', proxy({
 }));
 
 app.get('*', function (req, res) {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(process.env.FRONTEND_PORT || 4000, function () {

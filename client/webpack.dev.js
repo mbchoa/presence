@@ -13,9 +13,10 @@ module.exports = WebpackMerge(CommonConfig, {
     filename: '[name].js'
   },
   devServer: {
+    host: '0.0.0.0',
     proxy: {
       "/api": {
-        target: "http://localhost:3000",
+        target: `http://${process.env.BACKEND_HOST}:${process.env.BACKEND_PORT}`,
         pathRewrite: { "^/api": "" }
       }
     }

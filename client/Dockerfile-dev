@@ -1,0 +1,11 @@
+FROM node:alpine
+
+# Create app directory
+RUN mkdir -p /usr/src/web
+WORKDIR /usr/src/web
+
+# Install app dependencies
+RUN npm install
+
+EXPOSE 8080
+CMD [ "npm", "run", "dev" ]
