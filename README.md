@@ -40,6 +40,18 @@
 └── config.js                   # Environment variables config file
 ```
 ## Development
+You can develop on this project in two ways:
+
+1. Docker method:  Run the single command below and start hacking
+2. Piecemeal method:  Start up the backend server, then start up the client-side webpack dev server
+
+### Docker Setup
+
+1. Run `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
+2. Open browser at `http://localhost:8080`
+
+This will bring up the Redis and MongoDB containers and start up webpack-dev-server at `http://0.0.0.0:8080` in a container and mount the `/client` folder inside the frontend container so changes can be made live.
+
 ### Client Setup
 
 1. `cd` to `/client` folder in this repo
