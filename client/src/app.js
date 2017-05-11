@@ -33,7 +33,6 @@ class App extends Component {
                             <Route path="/login" component={LoginPage} />
                             <PrivateRoute path="/stopwatch" component={StopWatchPage} />
                             <PrivateRoute exact path="/history" component={HistoryPage} />
-                            <PrivateRoute path="/history/:month" component={MonthDetail} />
                             <Route component={NotFoundPage} />
                         </Switch>
                     </div>
