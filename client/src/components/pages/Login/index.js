@@ -11,7 +11,7 @@ import LoginForm from './LoginForm';
 const LoginPage = ({ isAuthenticated, location }) => {
     const { from } = location.state || { from: { pathname: '/' } };
     return isAuthenticated
-        ? <Redirect t={ from } />
+        ? <Redirect to={ from } />
         : <div className="login">
                 <div className="login__modal">
                     <Paper className="modal">
