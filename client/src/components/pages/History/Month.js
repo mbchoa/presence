@@ -59,26 +59,26 @@ class Month extends Component {
         return (
             <div className="month">
                 <h1 className="month__title">{ format(date, 'MMMM') }</h1>
-                <Grid width="270" height="380">
+                <Grid width="380" height="270">
                     <Week 
                         key={0} 
                         padding="5"
                         data={ slice(normalizedSessions, 0, 7) } />
                     <Week 
                         key={1}
-                        padding="5" transform="translate(55, 0)"
+                        padding="5" transform="translate(0, 55)"
                         data={ slice(normalizedSessions, 7, 14) } />
                     <Week 
                         key={2} 
-                        padding="5" transform="translate(110, 0)"
+                        padding="5" transform="translate(0, 110)"
                         data={ slice(normalizedSessions, 14, 21) } />
                     <Week 
                         key={3} 
-                        padding="5" transform="translate(165, 0)"
+                        padding="5" transform="translate(0, 165)"
                         data={ slice(normalizedSessions, 21, 28) } />
                     <Week 
                         key={4} 
-                        padding="5" transform="translate(220, 0)"
+                        padding="5" transform="translate(0, 220)"
                         data={ slice(normalizedSessions, 28) } />
                 </Grid>
             </div>
