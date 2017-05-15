@@ -1,6 +1,21 @@
 .signup {
+    font-family: 'Nunito', sans-serif;
 
-    &__error {
-        color: red;
+    &__modal {
+        width: 440px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.modal {    
+    &__form {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-width: 0 1px 1px 1px;
+        border-style: solid;
+        border-color: #DDDDDD;
+        padding: 30px 60px;
     }
 }
