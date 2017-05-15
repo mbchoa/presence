@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
 import RaisedButton from 'material-ui/RaisedButton';
 import { blueGrey600 } from 'material-ui/styles/colors';
@@ -17,41 +17,52 @@ class SignupForm extends Component {
 
     _submit (data) {
         const { history, registerUser } = this.props;
-        registerUser(data)
-            .then(() => {
-                history.push('/login');
+        return registerUser(data)
+            .then(({ error }) => {
+                if (error) {
+                    throw new SubmissionError({
+                        email: 'Email already exists',
+                        _error: 'Login failed'
+                    });
+                } else {
+                    history.push('/login');
+                }
             });
     }
 
-    renderTextField ({ input, label }) {
+    renderTextField ({ input, label, meta: { error, touched } }) {
         return (
-            <TextField {...{
-                floatingLabelText: label,
-                floatingLabelFocusStyle: {
-                    color: blueGrey600
-                },
-                fullWidth: true,
-                ...input,
-                inputStyle: {
-                    color: 'black'
-                },
-                underlineFocusStyle: {
-                    borderColor: blueGrey600
-                }
-            }} />
+            <div>
+                <TextField {...{
+                    floatingLabelText: label,
+                    floatingLabelFocusStyle: {
+                        color: blueGrey600
+                    },
+                    fullWidth: true,
+                    ...input,
+                    inputStyle: {
+                        color: 'black'
+                    },
+                    underlineFocusStyle: {
+                        borderColor: blueGrey600
+                    }
+                }} />
+                { touched && error && <p className="modal__error">{ error }</p> }
+            </div>
         );
     }
 
     render () {
-        const { handleSubmit } = this.props;
+        const { error, handleSubmit, submitting } = this.props;
         return (
             <div className="modal__form">
                 <form onSubmit={ handleSubmit(this._submit) }>
                     <Field name="email" label="Email" component={this.renderTextField} />
                     <Field name="password" label="Password" component={this.renderTextField} />
                     <RaisedButton 
-                        label="Register"
+                        disabled={submitting}
                         fullWidth={true} 
+                        label="Register"
                         type="submit" />
                 </form>
             </div>
