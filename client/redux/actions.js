@@ -11,10 +11,9 @@ import Sessions from '../api/models/Sessions';
 
 const MIN_SAVE_TIME_DURATION = 60000;
 
-function notifyAuthenticationFailed(loginErrorMessage) {
+function notifyAuthenticationFailed() {
     return {
         type: NOTIFY_AUTHENTICATION_FAILED,
-        loginErrorMessage
     };
 }
 
@@ -24,16 +23,14 @@ function notifyAuthenticationInProgress() {
     };
 }
 
-function notifyAuthenticationSuccess(loginSuccessMessage) {
+function notifyAuthenticationSuccess() {
     return {
         type: NOTIFY_AUTHENTICATION_SUCCESS,
-        loginSuccessMessage
     };
 }
 
 export function loginUser({ email, password }) {
     return dispatch => {
-        console.log('Attemping to login user...');
         dispatch(notifyAuthenticationInProgress());
 
         const options = {
@@ -52,9 +49,10 @@ export function loginUser({ email, password }) {
             .then(response => response.json())
             .then(({ error, successMsg, userId }) => {
                 if (error) {
-                    return dispatch(notifyAuthenticationFailed(error));
+                    dispatch(setIsAuthenticated(false));
+                    return { error };
                 }
-                dispatch(notifyAuthenticationSuccess(successMsg));
+                dispatch(setIsAuthenticated(true));
             });
     }
 }
@@ -105,27 +103,7 @@ export function registerUser ({ email, password }) {
         };
 
         return fetch('/api/signup', options)
-            .then(response => response.json())
-            .then(({ error, successMsg }) => {
-                if (error) {
-                    return dispatch(notifySignUpFailed(error));
-                }
-                dispatch(notifySignUpSuccess(successMsg));
-            });
-    };
-}
-
-export function notifySignUpFailed(error) {
-    return {
-        type: NOTIFY_SIGN_UP_FAILED,
-        error
-    };
-}
-
-export function notifySignUpSuccess(success) {
-    return {
-        type: NOTIFY_SIGN_UP_SUCCESS,
-        success
+            .then(response => response.json());
     };
 }
 
