@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
 import RaisedButton from 'material-ui/RaisedButton';
 import { blueGrey600 } from 'material-ui/styles/colors';
@@ -16,35 +16,57 @@ class LoginForm extends Component {
 
     _submit (data) {
         const { loginUser } = this.props;
-        loginUser(data);
+        return loginUser(data)
+            .then(({ error }) => {
+                if (error) {
+                    switch(error) {
+                        case 'You must enter an e-mail address':
+                            throw new SubmissionError({ email: error });
+                        case 'User does not exist. Please enter a valid username':
+                            throw new SubmissionError({ _error: error });
+                        case 'Error validating password. Please try again':
+                        case 'Invalid password, Please try again':
+                        case 'You must enter a password':
+                            throw new SubmissionError({ 
+                                password: error
+                            });
+                        default:
+                            break;
+                    }
+                }
+            });
     }
 
-    renderTextField ({ input, label }) {
+    renderTextField ({ input, label, meta: { error, touched } }) {
         return (
-            <TextField {...{
-                floatingLabelText: label,
-                floatingLabelFocusStyle: {
-                    color: blueGrey600
-                },
-                fullWidth: true,
-                ...input,
-                inputStyle: {
-                    color: 'black'
-                },
-                underlineFocusStyle: {
-                    borderColor: blueGrey600
-                }
-            }} />
+            <div>
+                <TextField {...{
+                    floatingLabelText: label,
+                    floatingLabelFocusStyle: {
+                        color: blueGrey600
+                    },
+                    fullWidth: true,
+                    ...input,
+                    inputStyle: {
+                        color: 'black'
+                    },
+                    underlineFocusStyle: {
+                        borderColor: blueGrey600
+                    }
+                }} />
+                { touched && error && <p className="modal__error">{ error }</p> }
+            </div>
         );
     }
 
     render () {
-        const { handleSubmit } = this.props;
+        const { error, handleSubmit } = this.props;
         return (
             <div className="modal__form">
                 <form onSubmit={ handleSubmit(this._submit) }>
                     <Field name="email" label="Email" component={this.renderTextField} />
                     <Field name="password" label="Password" component={this.renderTextField} />
+                    { error && <p className="modal__error">{ error }</p> }
                     <RaisedButton 
                         label="Login"
                         fullWidth={true} 
