@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     BrowserRouter as Router,
     Route,
-    Switch
+    Switch,
 } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -21,8 +21,8 @@ import './styles.css';
 import { LightDarkGreyTheme } from './themes';
 
 class App extends Component {
-    render () {
-        return (
+  render() {
+    return (
             <MuiThemeProvider muiTheme={getMuiTheme(LightDarkGreyTheme)}>
                 <Router>
                     <div>
@@ -38,8 +38,8 @@ class App extends Component {
                     </div>
                 </Router>
             </MuiThemeProvider>
-        );
-    }
+    );
+  }
 }
 
 export default App;

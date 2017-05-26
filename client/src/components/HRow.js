@@ -1,20 +1,20 @@
 import React from 'react';
 import { assign, map } from 'lodash';
 
-const HRow = (props) =>
+const HRow = props =>
     <g transform={ props.transform }>
         {
-            map(props.children, (child, i) => 
+            map(props.children, (child, i) =>
                 React.cloneElement(
                     child,
                     assign(
                         { key: i },
                         child.props,
-                        { x: i * (+child.props.width + +props.padding)  }
-                    )
-                )
+                        { x: i * (+child.props.width + +props.padding) },
+                    ),
+                ),
             )
         }
-    </g>
+    </g>;
 
 export default HRow;

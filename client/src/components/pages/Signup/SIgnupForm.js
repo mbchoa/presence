@@ -9,70 +9,70 @@ import { blueGrey600 } from 'material-ui/styles/colors';
 import { registerUser } from '../../../../redux/actions';
 
 class SignupForm extends Component {
-    constructor () {
-        super();
-        this.renderTextField = this.renderTextField.bind(this);
-        this._submit = this._submit.bind(this);
-    }
+  constructor() {
+    super();
+    this.renderTextField = this.renderTextField.bind(this);
+    this._submit = this._submit.bind(this);
+  }
 
-    _submit (data) {
-        const { history, registerUser } = this.props;
-        return registerUser(data)
+  _submit(data) {
+    const { history, registerUser } = this.props;
+    return registerUser(data)
             .then(({ error }) => {
-                if (error) {
-                    throw new SubmissionError({
-                        email: 'Email already exists',
-                        _error: 'Login failed'
-                    });
-                } else {
-                    history.push('/login');
-                }
+              if (error) {
+                throw new SubmissionError({
+                  email: 'Email already exists',
+                  _error: 'Login failed',
+                });
+              } else {
+                history.push('/login');
+              }
             });
-    }
+  }
 
-    renderTextField ({ input, label, meta: { error, touched } }) {
-        return (
+  renderTextField({ input, label, meta: { error, touched } }) {
+    return (
             <div>
                 <TextField {...{
-                    floatingLabelText: label,
-                    floatingLabelFocusStyle: {
-                        color: blueGrey600
-                    },
-                    fullWidth: true,
-                    ...input,
-                    inputStyle: {
-                        color: 'black'
-                    },
-                    underlineFocusStyle: {
-                        borderColor: blueGrey600
-                    }
+                  floatingLabelText: label,
+                  floatingLabelFocusStyle: {
+                    color: blueGrey600,
+                  },
+                  fullWidth: true,
+                  ...input,
+                  inputStyle: {
+                    color: 'black',
+                  },
+                  underlineFocusStyle: {
+                    borderColor: blueGrey600,
+                  },
                 }} />
                 { touched && error && <p className="modal__error">{ error }</p> }
             </div>
-        );
-    }
+    );
+  }
 
-    render () {
-        const { error, handleSubmit, submitting } = this.props;
-        return (
+  render() {
+    const { error, handleSubmit, submitting } = this.props;
+    return (
             <div className="modal__form">
                 <form onSubmit={ handleSubmit(this._submit) }>
                     <Field name="email" label="Email" component={this.renderTextField} />
                     <Field name="password" label="Password" component={this.renderTextField} />
-                    <RaisedButton 
+                    <RaisedButton
                         disabled={submitting}
-                        fullWidth={true} 
+                        fullWidth={true}
                         label="Register"
                         type="submit" />
                 </form>
             </div>
-        );
-    }
+    );
+  }
 }
 
- export default withRouter(connect(
+export default withRouter(connect(
      null,
-     { registerUser }
+     { registerUser },
  )(reduxForm({
-     form: 'signup',
+   form: 'signup',
  })(SignupForm)));

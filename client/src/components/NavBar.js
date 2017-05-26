@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { format } from 'date-fns';
-import { 
+import {
     Toolbar,
     ToolbarGroup,
-    ToolbarTitle
+    ToolbarTitle,
 } from 'material-ui/Toolbar';
 import FlatButton from 'material-ui/FlatButton';
 import { white } from 'material-ui/styles/colors';
@@ -17,54 +17,54 @@ import FlatButtonLink from './FlatButtonLink';
 const NavBar = ({
     isAuthenticated,
     location: { pathname },
-    logoutUser
-}) => 
+    logoutUser,
+}) =>
     <Toolbar>
         <Link to="/" style={{ textDecoration: 'none' }}>
             <ToolbarTitle text="Presence" style={{
-                color: white
+              color: white,
             }} />
         </Link>
         <ToolbarGroup>
             { isAuthenticated && [
-                <FlatButtonLink
+              <FlatButtonLink
                     key="stopwatch"
                     label="Stopwatch"
                     to="/stopwatch"
                 />,
-                <FlatButtonLink 
+              <FlatButtonLink
                     key="history"
                     label="History"
                     to="/history"
                 />,
-                <FlatButton
+              <FlatButton
                     key="logout"
                     label="Logout"
                     onClick={ logoutUser }
                     style={{
-                        marginLeft: '0px',
-                        marginRight: '0px'
+                      marginLeft: '0px',
+                      marginRight: '0px',
                     }}
-                />
+                />,
             ]}
             { pathname !== '/signup' && !isAuthenticated &&
-                <FlatButtonLink 
-                    key="signup" 
-                    label="Signup" 
-                    to="/signup" 
+                <FlatButtonLink
+                    key="signup"
+                    label="Signup"
+                    to="/signup"
                 />
             }
             { pathname !== '/login' && !isAuthenticated &&
-                <FlatButtonLink 
+                <FlatButtonLink
                     key="login"
-                    label="Login" 
-                    to="/login" 
+                    label="Login"
+                    to="/login"
                 />
             }
         </ToolbarGroup>
-    </Toolbar>
+    </Toolbar>;
 
 export default withRouter(connect(
     ({ root }) => ({ isAuthenticated: root.isAuthenticated }),
-    { logoutUser }
+    { logoutUser },
 )(NavBar));

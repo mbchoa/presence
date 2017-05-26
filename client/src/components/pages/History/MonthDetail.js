@@ -7,34 +7,34 @@ import { getMonthSessions } from '../../../../redux/actions';
 import { calculateOverflowTime } from '../../../helpers/timer';
 
 class MonthDetail extends Component {
-    componentDidMount () {
-        this.props.getMonthSessions(this.props.match.params.month);
-    }
+  componentDidMount() {
+    this.props.getMonthSessions(this.props.match.params.month);
+  }
 
-    renderTime ({ hours, minutes }) {
-        return (
+  renderTime({ hours, minutes }) {
+    return (
             <div>
                 { hours } hours
                 {' '}
                 { minutes } minutes
             </div>
-        );
-    }
+    );
+  }
 
-    render () {
-        const { 
+  render() {
+    const {
             match,
             monthSessions,
             monthTotalTime,
         } = this.props;
 
-        const formattedTotalTime = calculateOverflowTime(monthTotalTime);
-        const formattedSessions = map(monthSessions, ({ duration, startTime}) => ({
-            formattedTime: calculateOverflowTime(duration),
-            startTime,
-        }));
+    const formattedTotalTime = calculateOverflowTime(monthTotalTime);
+    const formattedSessions = map(monthSessions, ({ duration, startTime }) => ({
+      formattedTime: calculateOverflowTime(duration),
+      startTime,
+    }));
 
-        return (
+    return (
             <div className="month-detail">
                 <h1 className="month-detail__title">{ match.params.month } 2017</h1>
                 { !monthSessions
@@ -50,8 +50,7 @@ class MonthDetail extends Component {
                         </div>
                         <ul className="month-detail__days">
                             {
-                                map(formattedSessions, ({ formattedTime, startTime }, key) => {
-                                    return (
+                                map(formattedSessions, ({ formattedTime, startTime }, key) => (
                                         <li key={key} className="month-detail__day">
                                             <div className="month-detail__date">
                                                 <h3>{ format(startTime, 'MMMM D') }</h3>
@@ -61,23 +60,20 @@ class MonthDetail extends Component {
                                                 { this.renderTime(formattedTime) }
                                             </div>
                                         </li>
-                                    );
-                                })
+                                    ))
                             }
                         </ul>
                     </div>
                 }
             </div>
-        );
-    }
+    );
+  }
 }
 
 export default connect(
-    ({ root }) => {
-        return {
-            monthSessions: root.monthSessions,
-            monthTotalTime: root.monthTotalTime,
-        };
-    },
-    { getMonthSessions }
+    ({ root }) => ({
+      monthSessions: root.monthSessions,
+      monthTotalTime: root.monthTotalTime,
+    }),
+    { getMonthSessions },
 )(MonthDetail);

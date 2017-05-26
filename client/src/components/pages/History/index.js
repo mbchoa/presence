@@ -5,8 +5,8 @@ import Month from './Month';
 import styles from './styles.css';
 
 export default class HistoryPage extends Component {
-    render() {
-        return (
+  render() {
+    return (
             <div className="history-page">
                 <div className="history-page__month-container">
                     <div className="history-page__month-dropzone">
@@ -14,6 +14,6 @@ export default class HistoryPage extends Component {
                     </div>
                 </div>
             </div>
-        );
-    }
+    );
+  }
 }

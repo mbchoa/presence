@@ -1,12 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 
 import configureStore from '../redux/configureStore';
 import { checkAuth } from '../redux/actions';
 
-import App from './app'
+import App from './app';
 
 const store = configureStore();
 
@@ -17,12 +17,12 @@ const render = () => {
         <App />
       </Provider>
     </AppContainer>,
-    document.getElementById('root')
-  )
-}
+    document.getElementById('root'),
+  );
+};
 
 if (module.hot) {
-  module.hot.accept('./app', () => { render() });
+  module.hot.accept('./app', () => { render(); });
 }
 
 store.dispatch(checkAuth()).then(() => {
