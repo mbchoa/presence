@@ -1,21 +1,19 @@
-import { 
-    flatMap, 
-    flowRight, 
-    groupBy, 
-    map, 
-    max, 
-    partialRight, 
-    reduce, 
-    sumBy 
+import {
+    flatMap,
+    flowRight,
+    groupBy,
+    map,
+    max,
+    partialRight,
+    reduce,
+    sumBy
 } from 'lodash';
-import { 
+import {
     differenceInMilliseconds,
     startOfDay
 } from 'date-fns';
 
-import { 
-    calculateOverflowTime as formatTimeDuration 
-} from '../../src/helpers/timer';
+import * as formatTimeDuration from '../../helpers/timer';
 
 export default class Sessions {
     constructor (sessions) {

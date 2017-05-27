@@ -7,7 +7,7 @@ export const SAVE_CURRENT_SESSION_TIME = 'SAVE_CURRENT_SESSION_TIME';
 export const SET_MONTH_SESSIONS = 'SET_MONTH_SESSIONS';
 export const SET_IS_AUTHENTICATED = 'SET_IS_AUTHENTICATED';
 
-import Sessions from '../../api/models/Sessions';
+import Sessions from '../api/models/Sessions';
 
 const MIN_SAVE_TIME_DURATION = 60000;
 
