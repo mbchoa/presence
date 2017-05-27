@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import styles from './styles.css';
@@ -9,6 +10,11 @@ import EnhancedStopwatch from '../../../utils/EnhancedStopwatch';
 import StopWatchDisplay from './StopWatchDisplay';
 
 class StopWatchPage extends Component {
+  static propTypes = {
+    currentSessionTime: PropTypes.number.isRequired,
+    saveTime: PropTypes.func.isRequired,
+  };
+
   constructor() {
     super();
     this.state = {
@@ -70,25 +76,25 @@ class StopWatchPage extends Component {
         }`;
 
     return (
-            <div className="stopwatch-page">
-                <div className="stopwatch-page__center-div">
-                    <div className="stopwatch-page__display" onClick={ this.toggleTimer }>
-                        <div className="stopwatch-page__center-div">
-                            <StopWatchDisplay elapsedMs={ elapsedMs } />
-                        </div>
-                    </div>
-                    <div className="stopwatch-page__media-control">
-                        <div className="stopwatch-page__center-controls">
-                            <button className="stopwatch-page__playback-btn" onClick={ this.toggleTimer }>
-                                <div className={ btnLabelClass }></div>
-                            </button>
-                            {/* { elapsedMs > 0 &&
+      <div className="stopwatch-page">
+        <div className="stopwatch-page__center-div">
+          <div className="stopwatch-page__display" onClick={this.toggleTimer}>
+            <div className="stopwatch-page__center-div">
+              <StopWatchDisplay elapsedMs={elapsedMs} />
+            </div>
+          </div>
+          <div className="stopwatch-page__media-control">
+            <div className="stopwatch-page__center-controls">
+              <button className="stopwatch-page__playback-btn" onClick={this.toggleTimer}>
+                <div className={btnLabelClass} />
+              </button>
+              {/* { elapsedMs > 0 &&
                                 <button onClick={ this.resetTimer }>Reset</button>
                             }*/}
-                        </div>
-                    </div>
-                </div>
             </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }

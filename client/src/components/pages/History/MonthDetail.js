@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { map, partial } from 'lodash';
+import { map } from 'lodash';
 import { format } from 'date-fns';
 
 import { getMonthSessions } from '../../../../redux/actions';
 import { calculateOverflowTime } from '../../../helpers/timer';
 
 class MonthDetail extends Component {
+  static propTypes = {
+    getMonthSessions: PropTypes.func.isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.object,
+    }),
+    monthSessions: PropTypes.array.isRequired,
+    monthTotalTime: PropTypes.number.isRequired,
+  };
+
   componentDidMount() {
     this.props.getMonthSessions(this.props.match.params.month);
   }
 
   renderTime({ hours, minutes }) {
     return (
-            <div>
-                { hours } hours
+      <div>
+        { hours } hours
                 {' '}
-                { minutes } minutes
+        { minutes } minutes
             </div>
     );
   }
@@ -35,37 +45,37 @@ class MonthDetail extends Component {
     }));
 
     return (
-            <div className="month-detail">
-                <h1 className="month-detail__title">{ match.params.month } 2017</h1>
-                { !monthSessions
+      <div className="month-detail">
+        <h1 className="month-detail__title">{ match.params.month } 2017</h1>
+        { !monthSessions
                     ? <h3>Loading...</h3>
                     : <div className="month-detail__content">
-                        <div className="month-detail__month-total">
-                            <h3 className="month-detail__month-total-header">
+                      <div className="month-detail__month-total">
+                        <h3 className="month-detail__month-total-header">
                                 Month Total
                             </h3>
-                            <div className="month-detail__duration">
-                                { this.renderTime(formattedTotalTime) }
-                            </div>
+                        <div className="month-detail__duration">
+                          { this.renderTime(formattedTotalTime) }
                         </div>
-                        <ul className="month-detail__days">
-                            {
+                      </div>
+                      <ul className="month-detail__days">
+                        {
                                 map(formattedSessions, ({ formattedTime, startTime }, key) => (
-                                        <li key={key} className="month-detail__day">
-                                            <div className="month-detail__date">
-                                                <h3>{ format(startTime, 'MMMM D') }</h3>
-                                                <h5>{ format(startTime, 'h:mm a') }</h5>
-                                            </div>
-                                            <div className="month-detail__duration">
-                                                { this.renderTime(formattedTime) }
-                                            </div>
-                                        </li>
+                                  <li key={key} className="month-detail__day">
+                                    <div className="month-detail__date">
+                                      <h3>{ format(startTime, 'MMMM D') }</h3>
+                                      <h5>{ format(startTime, 'h:mm a') }</h5>
+                                    </div>
+                                    <div className="month-detail__duration">
+                                      { this.renderTime(formattedTime) }
+                                    </div>
+                                  </li>
                                     ))
                             }
-                        </ul>
+                      </ul>
                     </div>
                 }
-            </div>
+      </div>
     );
   }
 }

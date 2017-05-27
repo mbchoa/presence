@@ -26,7 +26,7 @@ module.exports = WebpackMerge(CommonConfig, {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: [ 'babel-loader', 'eslint-loader' ]
+        loader: [ 'babel-loader' ]
       }
     ]
   }

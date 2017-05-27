@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
@@ -8,6 +9,12 @@ import { blueGrey600 } from 'material-ui/styles/colors';
 import { loginUser } from '../../../../redux/actions';
 
 class LoginForm extends Component {
+  static propTypes = {
+    error: PropTypes.string.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    loginUser: PropTypes.func.isRequired,
+  };
+
   constructor() {
     super();
     this.renderTextField = this.renderTextField.bind(this);
@@ -39,40 +46,42 @@ class LoginForm extends Component {
 
   renderTextField({ input, label, meta: { error, touched } }) {
     return (
-            <div>
-                <TextField {...{
-                  floatingLabelText: label,
-                  floatingLabelFocusStyle: {
-                    color: blueGrey600,
-                  },
-                  fullWidth: true,
-                  ...input,
-                  inputStyle: {
-                    color: 'black',
-                  },
-                  underlineFocusStyle: {
-                    borderColor: blueGrey600,
-                  },
-                }} />
-                { touched && error && <p className="modal__error">{ error }</p> }
-            </div>
+      <div>
+        <TextField {...{
+          floatingLabelText: label,
+          floatingLabelFocusStyle: {
+            color: blueGrey600,
+          },
+          fullWidth: true,
+          ...input,
+          inputStyle: {
+            color: 'black',
+          },
+          underlineFocusStyle: {
+            borderColor: blueGrey600,
+          },
+        }}
+        />
+        { touched && error && <p className="modal__error">{ error }</p> }
+      </div>
     );
   }
 
   render() {
     const { error, handleSubmit } = this.props;
     return (
-            <div className="modal__form">
-                <form onSubmit={ handleSubmit(this._submit) }>
-                    <Field name="email" label="Email" component={this.renderTextField} />
-                    <Field name="password" label="Password" component={this.renderTextField} />
-                    { error && <p className="modal__error">{ error }</p> }
-                    <RaisedButton
-                        label="Login"
-                        fullWidth={true}
-                        type="submit" />
-                </form>
-            </div>
+      <div className="modal__form">
+        <form onSubmit={handleSubmit(this._submit)}>
+          <Field name="email" label="Email" component={this.renderTextField} />
+          <Field name="password" label="Password" component={this.renderTextField} />
+          { error && <p className="modal__error">{ error }</p> }
+          <RaisedButton
+            label="Login"
+            fullWidth
+            type="submit"
+          />
+        </form>
+      </div>
     );
   }
 }

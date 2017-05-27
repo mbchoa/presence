@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropType from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
@@ -9,6 +10,14 @@ import { blueGrey600 } from 'material-ui/styles/colors';
 import { registerUser } from '../../../../redux/actions';
 
 class SignupForm extends Component {
+  static propTypes = {
+    error: PropType.string.isRequired,
+    handleSubmit: PropType.func.isRequired,
+    history: PropType.object.isRequired,
+    registerUser: PropType.func.isRequired,
+    submitting: PropType.bool.isRequired,
+  };
+
   constructor() {
     super();
     this.renderTextField = this.renderTextField.bind(this);
@@ -32,40 +41,42 @@ class SignupForm extends Component {
 
   renderTextField({ input, label, meta: { error, touched } }) {
     return (
-            <div>
-                <TextField {...{
-                  floatingLabelText: label,
-                  floatingLabelFocusStyle: {
-                    color: blueGrey600,
-                  },
-                  fullWidth: true,
-                  ...input,
-                  inputStyle: {
-                    color: 'black',
-                  },
-                  underlineFocusStyle: {
-                    borderColor: blueGrey600,
-                  },
-                }} />
-                { touched && error && <p className="modal__error">{ error }</p> }
-            </div>
+      <div>
+        <TextField {...{
+          floatingLabelText: label,
+          floatingLabelFocusStyle: {
+            color: blueGrey600,
+          },
+          fullWidth: true,
+          ...input,
+          inputStyle: {
+            color: 'black',
+          },
+          underlineFocusStyle: {
+            borderColor: blueGrey600,
+          },
+        }}
+        />
+        { touched && error && <p className="modal__error">{ error }</p> }
+      </div>
     );
   }
 
   render() {
-    const { error, handleSubmit, submitting } = this.props;
+    const { handleSubmit, submitting } = this.props;
     return (
-            <div className="modal__form">
-                <form onSubmit={ handleSubmit(this._submit) }>
-                    <Field name="email" label="Email" component={this.renderTextField} />
-                    <Field name="password" label="Password" component={this.renderTextField} />
-                    <RaisedButton
-                        disabled={submitting}
-                        fullWidth={true}
-                        label="Register"
-                        type="submit" />
-                </form>
-            </div>
+      <div className="modal__form">
+        <form onSubmit={handleSubmit(this._submit)}>
+          <Field name="email" label="Email" component={this.renderTextField} />
+          <Field name="password" label="Password" component={this.renderTextField} />
+          <RaisedButton
+            disabled={submitting}
+            fullWidth
+            label="Register"
+            type="submit"
+          />
+        </form>
+      </div>
     );
   }
 }

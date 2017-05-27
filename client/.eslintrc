@@ -1,12 +1,21 @@
 {
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
     "parser": "babel-eslint",
     "plugins": [
         "react"
     ],
+    "extends": [
+        "plugin:react/recommended"
+    ],
     "rules": {
-    },
-    "extends": [ 
-        "plugin:react/recommended",
-        "airbnb-base" 
-    ]
+      "class-methods-use-this": "off",
+      "no-shadow": "off",
+      "no-mixed-operators": "off",
+      "no-underscore-dangle": "off",
+      "import/prefer-default-export": "off"
+    }
 }

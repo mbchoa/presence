@@ -1,7 +1,6 @@
 import {
     grey50, white, grey400,
     blueGrey600, blueGrey400, blueGrey900,
-    fullBlack,
 } from 'material-ui/styles/colors';
 
 export default {

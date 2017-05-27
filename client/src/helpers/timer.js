@@ -1,4 +1,4 @@
-export function calculateOverflowTime(elapsedMs) {
+export default function calculateOverflowTime(elapsedMs) {
   return {
     hours: Math.floor(elapsedMs / 3600000),
     minutes: Math.floor(elapsedMs / 60000) % 60,

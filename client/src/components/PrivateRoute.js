@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, Route, withRouter } from 'react-router-dom';
 
 class PrivateRoute extends Component {
+  static propTypes = {
+    component: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+  };
+
   render() {
     const {
             component,
@@ -11,16 +17,19 @@ class PrivateRoute extends Component {
         } = this.props;
 
     return (
-            <Route { ...rest } render={ props => (
+      <Route
+        {...rest} render={props => (
                 isAuthenticated ? (
                     React.createElement(component, props)
                 ) : (
-                    <Redirect to={{
-                      pathname: '/login',
-                      state: { from: props.location },
-                    }} />
+                  <Redirect to={{
+                    pathname: '/login',
+                    state: { from: props.location },
+                  }}
+                  />
                 )
-            )} />
+            )}
+      />
     );
   }
 }

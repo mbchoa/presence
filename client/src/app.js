@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
     BrowserRouter as Router,
     Route,
@@ -7,7 +7,6 @@ import {
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import MonthDetail from './components/pages/History/MonthDetail';
 import HomePage from './components/pages/Home';
 import SignupPage from './components/pages/Signup';
 import LoginPage from './components/pages/Login';
@@ -20,26 +19,21 @@ import NavBar from './components/NavBar';
 import './styles.css';
 import { LightDarkGreyTheme } from './themes';
 
-class App extends Component {
-  render() {
-    return (
-            <MuiThemeProvider muiTheme={getMuiTheme(LightDarkGreyTheme)}>
-                <Router>
-                    <div>
-                        <NavBar />
-                        <Switch>
-                            <Route exact path="/" component={HomePage} />
-                            <Route path="/signup" component={SignupPage} />
-                            <Route path="/login" component={LoginPage} />
-                            <PrivateRoute path="/stopwatch" component={StopWatchPage} />
-                            <PrivateRoute exact path="/history" component={HistoryPage} />
-                            <Route component={NotFoundPage} />
-                        </Switch>
-                    </div>
-                </Router>
-            </MuiThemeProvider>
-    );
-  }
-}
+const App = () =>
+  (<MuiThemeProvider muiTheme={getMuiTheme(LightDarkGreyTheme)}>
+    <Router>
+      <div>
+        <NavBar />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/signup" component={SignupPage} />
+          <Route path="/login" component={LoginPage} />
+          <PrivateRoute path="/stopwatch" component={StopWatchPage} />
+          <PrivateRoute exact path="/history" component={HistoryPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </div>
+    </Router>
+  </MuiThemeProvider>);
 
 export default App;

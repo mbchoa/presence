@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
     addDays,
@@ -14,6 +15,13 @@ import Grid from '../../Grid';
 import Week from './Week';
 
 class Month extends Component {
+  static propTypes = {
+    date: PropTypes.instanceOf(Date),
+    getMonthSessions: PropTypes.func.isRequired,
+    maxDuration: PropTypes.number,
+    monthSessions: PropTypes.array,
+  };
+
   constructor() {
     super();
     this.calculateFillLevel = this.calculateFillLevel.bind(this);
@@ -57,31 +65,36 @@ class Month extends Component {
     const normalizedSessions = this.normalizeMonthSessions();
 
     return (
-            <div className="month">
-                <h1 className="month__title">{ format(date, 'MMMM') }</h1>
-                <Grid width="380" height="270">
-                    <Week
-                        key={0}
-                        padding="5"
-                        data={ slice(normalizedSessions, 0, 7) } />
-                    <Week
-                        key={1}
-                        padding="5" transform="translate(0, 55)"
-                        data={ slice(normalizedSessions, 7, 14) } />
-                    <Week
-                        key={2}
-                        padding="5" transform="translate(0, 110)"
-                        data={ slice(normalizedSessions, 14, 21) } />
-                    <Week
-                        key={3}
-                        padding="5" transform="translate(0, 165)"
-                        data={ slice(normalizedSessions, 21, 28) } />
-                    <Week
-                        key={4}
-                        padding="5" transform="translate(0, 220)"
-                        data={ slice(normalizedSessions, 28) } />
-                </Grid>
-            </div>
+      <div className="month">
+        <h1 className="month__title">{ format(date, 'MMMM') }</h1>
+        <Grid width="380" height="270">
+          <Week
+            key={0}
+            padding="5"
+            data={slice(normalizedSessions, 0, 7)}
+          />
+          <Week
+            key={1}
+            padding="5" transform="translate(0, 55)"
+            data={slice(normalizedSessions, 7, 14)}
+          />
+          <Week
+            key={2}
+            padding="5" transform="translate(0, 110)"
+            data={slice(normalizedSessions, 14, 21)}
+          />
+          <Week
+            key={3}
+            padding="5" transform="translate(0, 165)"
+            data={slice(normalizedSessions, 21, 28)}
+          />
+          <Week
+            key={4}
+            padding="5" transform="translate(0, 220)"
+            data={slice(normalizedSessions, 28)}
+          />
+        </Grid>
+      </div>
     );
   }
 }

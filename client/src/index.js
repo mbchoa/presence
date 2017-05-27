@@ -13,7 +13,7 @@ const store = configureStore();
 const render = () => {
   ReactDOM.render(
     <AppContainer>
-      <Provider store={ store }>
+      <Provider store={store}>
         <App />
       </Provider>
     </AppContainer>,
