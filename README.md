@@ -1,4 +1,4 @@
-> # pres·ence
+> # pres·ence [![Build Status](https://travis-ci.org/mbchoa/presence.svg?branch=master)](https://travis-ci.org/mbchoa/presence)
 > ## /ˈprezəns/
 > *noun*
 >
