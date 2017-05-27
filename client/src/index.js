@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 
-import configureStore from '../redux/configureStore';
-import { checkAuth } from '../redux/actions';
+import configureStore from './redux/configureStore';
+import { checkAuth } from './redux/actions';
 
 import App from './app';
 

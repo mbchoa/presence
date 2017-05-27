@@ -10,7 +10,7 @@ import {
 import FlatButton from 'material-ui/FlatButton';
 import { white } from 'material-ui/styles/colors';
 
-import { logoutUser } from '../../redux/actions';
+import { logoutUser } from '../redux/actions';
 
 import FlatButtonLink from './FlatButtonLink';
 

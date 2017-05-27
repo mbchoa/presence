@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import styles from './styles.css';
 
-import { saveCurrentSessionTime } from '../../../../redux/actions';
+import { saveCurrentSessionTime } from '../../../redux/actions';
 import EnhancedStopwatch from '../../../utils/EnhancedStopwatch';
 
 import StopWatchDisplay from './StopWatchDisplay';

@@ -6,11 +6,11 @@ import { TextField } from 'redux-form-material-ui';
 import RaisedButton from 'material-ui/RaisedButton';
 import { blueGrey600 } from 'material-ui/styles/colors';
 
-import { loginUser } from '../../../../redux/actions';
+import { loginUser } from '../../../redux/actions';
 
 class LoginForm extends Component {
   static propTypes = {
-    error: PropTypes.string.isRequired,
+    error: PropTypes.string,
     handleSubmit: PropTypes.func.isRequired,
     loginUser: PropTypes.func.isRequired,
   };

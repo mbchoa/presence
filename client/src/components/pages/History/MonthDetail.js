@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { map } from 'lodash';
 import { format } from 'date-fns';
 
-import { getMonthSessions } from '../../../../redux/actions';
+import { getMonthSessions } from '../../../redux/actions';
 import { calculateOverflowTime } from '../../../helpers/timer';
 
 class MonthDetail extends Component {

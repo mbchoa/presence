@@ -10,7 +10,7 @@ import {
 } from 'date-fns';
 import { filter, inRange, map, range, slice, sumBy } from 'lodash';
 
-import { getMonthSessions } from '../../../../redux/actions';
+import { getMonthSessions } from '../../../redux/actions';
 import Grid from '../../Grid';
 import Week from './Week';
 

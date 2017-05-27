@@ -7,11 +7,11 @@ import { TextField } from 'redux-form-material-ui';
 import RaisedButton from 'material-ui/RaisedButton';
 import { blueGrey600 } from 'material-ui/styles/colors';
 
-import { registerUser } from '../../../../redux/actions';
+import { registerUser } from '../../../redux/actions';
 
 class SignupForm extends Component {
   static propTypes = {
-    error: PropType.string.isRequired,
+    error: PropType.string,
     handleSubmit: PropType.func.isRequired,
     history: PropType.object.isRequired,
     registerUser: PropType.func.isRequired,

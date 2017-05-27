@@ -17,12 +17,13 @@
 ├── /client/                    # Client-side package
 │   ├── /api/                   # API model class definitions
 │   ├── /dist/                  # Client-side production build output folder
-│   ├── /redux/                 # Redux logic
 │   └── /src/                   # View source code
 │       ├── /components/        # Top-level React component package
 │       │   ├── /pages/         # Page-level route-associated components
 │       │   └── ...             # Shared React components
 │       ├── /helpers/           # Functional helpers
+│       ├── /redux/             # Redux logic
+│       ├── /themes/             # Themes folder
 │       ├── /utils/             # Class helpers
 │       ├── app.js              # React root component
 │       ├── index.js            # Client-side startup script
