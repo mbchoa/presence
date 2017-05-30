@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`timer test suite should return correct number of hours 1`] = `
+Object {
+  "hours": 1,
+  "minutes": 0,
+  "ms": 34,
+  "seconds": 52,
+}
+`;
+
+exports[`timer test suite should return correct number of minutes 1`] = `
+Object {
+  "hours": 0,
+  "minutes": 2,
+  "ms": 0,
+  "seconds": 5,
+}
+`;
+
+exports[`timer test suite should return correct number of seconds 1`] = `
+Object {
+  "hours": 0,
+  "minutes": 0,
+  "ms": 50,
+  "seconds": 3,
+}
+`;
