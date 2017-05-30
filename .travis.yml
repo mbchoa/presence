@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - "6.9.0"
-script: cd client && npm install && npm run lint
+script: cd client && npm install && npm run lint && npm test
 cache:
   directories:
     - client/node_modules
