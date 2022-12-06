@@ -14,7 +14,7 @@
     "connect-redis": "^3.2.0",
     "cors": "^2.8.3",
     "date-fns": "^1.28.3",
-    "express": "^4.15.2",
+    "express": "^4.17.3",
     "express-session": "^1.15.2",
     "http-proxy-middleware": "^0.17.4",
     "mongoose": "^4.9.2",
